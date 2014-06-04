@@ -35,8 +35,8 @@ type
   TApp42Api = class(TComponent)
   private const
     sStorage = 'storage';
-    sDBName = 'queryTest';
-    sUserCollectionName = 'App42AppUsers';
+    sDBName = 'App42DB';
+    sUserCollectionName = 'App42Users';
     sInstallations = 'installations';
     sFiles = 'upload';
     sUsers = 'user';
@@ -46,7 +46,7 @@ type
     sTimestamp = 'timeStamp';
   public const
     cDefaultApiVersion = '1.0';
-    cDefaultBaseURL = 'http://localhost:8082/App42_API_SERVER/cloud/1.0/'; // do not localize
+    cDefaultBaseURL = 'https://api.shephertz.com/cloud/1.0/'; // do not localize
   public type
     TDeviceNames = record
     public
