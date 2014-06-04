@@ -669,11 +669,7 @@ begin
   Result := DeleteResource(sInstallations + '/' + AObjectID, True);
 end;
 
-////curl -X GET \
-////  -H "X-App42-Application-Id: cIj01OkQeJ8LUzFZjMnFyJQD6qx0OehYep0mMdak" \
-////  -H "X-App42-Master-Key: CiQo8BgzcyoYuSwfG6ILYHluLnkizb4wQh4bbsr7" \
-////  https://api.parse.com/1/installations
-//function TApp42Api.QueryInstallation(const AQuery: TJSONObject;
+
 procedure TApp42Api.QueryInstallation(const AQuery: array of string; const AJSONArray: TJSONArray);
 begin
   FRequest.ResetToDefaults;
@@ -1811,7 +1807,7 @@ begin
     LDBCredentials.AddPair('collectionName', sUserCollectionName); // Do not localize
     // Adding UserDetails to headers With DBName And Collection Name.
     Request.Params.AddHeader('jsonObject', LUserDetails.ToString);
-    Request.Params.AddHeader('Delphi_DbCredentials',LDBCredentials.ToString);
+    Request.Params.AddHeader('dbCredentials',LDBCredentials.ToString);
     LUser := TJSONObject.Create;
   end
   else
