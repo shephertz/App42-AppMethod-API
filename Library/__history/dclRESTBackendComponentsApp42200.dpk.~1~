@@ -1,0 +1,50 @@
+package dclRESTBackendComponentsApp42200;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  xmlrtl,
+  dbrtl,
+  CustomIPTransport,
+  inet,
+  soaprtl,
+  bindengine,
+  bindcomp,
+  RESTBackendComponents,
+  RESTComponents,
+  IndySystem,
+  IndyProtocols,
+  IndyCore;
+
+contains
+  REST.Backend.App42Services in 'REST.Backend.App42Services.pas',
+  REST.Backend.App42Provider in 'REST.Backend.App42Provider.pas',
+  REST.Backend.App42Api in '..\Library\REST.Backend.App42Api.pas';
+
+end.
