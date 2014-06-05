@@ -5,8 +5,8 @@ App42 APIs for AppMethod
 
 1. Unzip the downloaded folder.
 2. Open App42REST.groupproj in Rad Studio.
-3. Compile and install the ___dclRESTBackendComponentsApp42200.dpk___.
-4. Compile and install the ___dclRESTBackendComponentsApp42.dpk___.
+3. Compile and install the ___dclRESTBackendComponentsApp42200.bpl___.
+4. Compile and install the ___dclRESTBackendComponentsApp42.bpl___.
 5. Now the TApp42Provider component is installed in BAAS Client category in Tool Pallete.
 6. Drag and Drop the TApp42Provider component in design view of App.
 8. Set the Credentials in ___Object Inspector___.
