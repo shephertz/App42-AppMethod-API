@@ -11,7 +11,7 @@ interface
 
 uses
   IdHMACSHA1, IdGlobal, System.Classes, System.SysUtils, System.Generics.Collections, System.JSON,
-  REST.Client, EncdDecd, REST.Json, REST.Types, REST.Backend.Consts, IdMultipartFormData, IdHTTP;
+  REST.Client, EncdDecd, REST.Json, REST.Types, REST.Backend.Consts, IdMultipartFormData, IdHTTP, IdSSLOpenSSL;
 
 {$SCOPEDENUMS ON}
 
@@ -1416,7 +1416,6 @@ var
   LSignature: string;
   Params: TIdMultipartFormDataStream;
   http: TIdHTTP;
-
   Today : TDateTime;
   TimeZone: TTimeZone;
   LTimeStampStr: string;
@@ -1424,6 +1423,7 @@ var
   LUniqeFileId: string;
   LResponseStr: string;
   LFile: TJSONObject;
+  LHandler: TIdSSLIOHandlerSocketOpenSSL;
 begin
   AddAuthParameters;
   FRequest.Resource  := sFiles;
@@ -1444,14 +1444,16 @@ try
    Params.AddFormField('type', AContentType);
    Params.AddFormField('description',AFileName);
 
-   http:=TIdHTTP.Create(nil);
-   http.Request.CustomHeaders.AddValue('signature',LSignature);
+  http:=TIdHTTP.Create(nil);
+  LHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
+  http.IOHandler:=LHandler;
+  http.Request.CustomHeaders.AddValue('signature',LSignature);
   http.Request.Accept := 'application/json';
   http.Request.CustomHeaders.AddValue(sTimestamp,LTimeStampStr);
   http.Request.CustomHeaders.AddValue(sApiKey, FConnectionInfo.ApiKey);
   http.Request.CustomHeaders.AddValue(sApiVersion, FConnectionInfo.ApiVersion);
-
   LMultiPartBaseUrl := cDefaultBaseURL+sFiles;
+
   LResponseStr := http.Post(LMultiPartBaseUrl,Params);
   LResponse := TJsonObject.ParseJsonValue(LResponseStr) as TJSONObject;
   LFile := LApp42Utils.RootFromResponse(LResponse);
@@ -2049,4 +2051,3 @@ else
    Result := AResponse;
 end;
 end.
-
