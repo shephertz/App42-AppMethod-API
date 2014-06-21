@@ -10,7 +10,8 @@ App42 APIs for AppMethod
 5. Now the TApp42Provider component is installed in BAAS Client category in Tool Pallete.
 6. Drag and Drop the TApp42Provider component in design view of App.
 8. Set the Credentials in ___Object Inspector___.
-7. Put the ApiVersion as ___1.0___ and register with [AppHQ] (http://apphq.shephertz.com/register/app42Login) for ___API_KEY___ and ___SECRET_KEY___.
+7. Put the ApiVersion as ___1.0___ and register with [AppHQ] (http://apphq.shephertz.com/register/app42Login).
+8. Make an ACL enabled app in AppHQ Console for ___ADMIN_KEY___, ___API_KEY___ and ___SECRET_KEY___.
 8. Select the provider as ___App42Provider1___ for the backend service component(i.e TBackendUsers).
 
 
@@ -23,4 +24,6 @@ For using ACL, Just make a TJSONObject or Json String and pass the key value pai
 {"PUBLIC":"R", "elmo":"W", "elmo":"R"}  // for giving the Read Permission to Public and Read/Write for user elmo.
 
 {"elmo":"W", "elmo":"R"}  // Private Document for user elmo.
+
+{"elmo":"W", "elmo":"R", "bert":"R"}  // user elmo can Read/Write and user bert can only read.
 ```
