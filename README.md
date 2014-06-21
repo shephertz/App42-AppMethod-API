@@ -12,3 +12,14 @@ App42 APIs for AppMethod
 8. Set the Credentials in ___Object Inspector___.
 7. Put the ApiVersion as ___1.0___ and register with [AppHQ] (http://apphq.shephertz.com/register/app42Login) for ___API_KEY___ and ___SECRET_KEY___.
 8. Select the provider as ___App42Provider1___ for the backend service component(i.e TBackendUsers).
+
+
+**ACL USAGE**
+For using ACL, Just make a TJSONObject or Json String and pass the key value pairs as described below. 
+```
+{"PUBLIC":"R", "PUBLIC":"W"}  // for giving the Read and Write Permission to Public (PUBLIC must be in caps).
+
+{"PUBLIC":"R", "elmo":"W", "elmo":"R"}  // for giving the Read Permission to Public and Read/Write for user elmo.
+
+{"elmo":"W", "elmo":"R"}  // Private Document for user elmo.
+```
