@@ -5,13 +5,14 @@
 { Copyright(c) 2014 Embarcadero Technologies, Inc.      }
 {                                                       }
 {*******************************************************}
+{$HPPEMIT LINKUNIT}
 unit REST.Backend.App42Provider;
 
 interface
 
 uses System.Classes, System.Generics.Collections, REST.Backend.Providers,
   REST.Backend.App42API, REST.Client, REST.Backend.ServiceTypes,
-  REST.Backend.MetaTypes,REST.Backend.ParseProvider;
+  REST.Backend.MetaTypes;
 
 type
 
@@ -40,16 +41,22 @@ type
     FNotifyOnChange: TNotifyList;
     FAndroidPush: TAndroidPush;
     procedure SetApiVersion(const Value: string);
- //   procedure SetApplicationID(const Value: string);
     procedure SetApiKey(const Value: string);
     procedure SetSecretKey(const Value: string);
- //   procedure SetDBName(const Value: string);
+    procedure SetAdminKey(const Value: string);
     function GetApiVersion: string;
-    function GetApiKey: string;
     function GetSecretKey: string;
-  //  function GetDBName: string;
-  //  function GetApplicationID: string;
+    function GetAdminKey: string;
+    function GetApiKey: string;
     procedure SetAndroidPush(const Value: TAndroidPush);
+    function GetProxyPassword: string;
+    function GetProxyPort: integer;
+    function GetProxyServer: string;
+    function GetProxyUsername: string;
+    procedure SetProxyPassword(const Value: string);
+    procedure SetProxyPort(const Value: integer);
+    procedure SetProxyServer(const Value: string);
+    procedure SetProxyUsername(const Value: string);
   protected
     procedure DoChanged; virtual;
     property NotifyOnChange: TNotifyList read FNotifyOnChange;
@@ -59,11 +66,14 @@ type
     procedure UpdateApi(const AApp42Api: TApp42Api);
 
     property ApiVersion: string read GetApiVersion write SetApiVersion;
- //   property ApplicationID: string read GetApplicationID write SetApplicationID;
     property ApiKey: string read GetApiKey write SetApiKey;
     property SecretKey: string read GetSecretKey write SetSecretKey;
-  //  property DBName: string read GetDBName write SetDBName;
+    property AdminKey: string read GetAdminKey write SetAdminKey;
     property AndroidPush: TAndroidPush read FAndroidPush write SetAndroidPush;
+    property ProxyPassword: string read GetProxyPassword write SetProxyPassword;
+    property ProxyPort: integer read GetProxyPort write SetProxyPort default 0;
+    property ProxyServer: string read GetProxyServer write SetProxyServer;
+    property ProxyUsername: string read GetProxyUsername write SetProxyUsername;
   end;
 
   TCustomApp42Provider = class(TCustomApp42ConnectionInfo, IBackendProvider, IRESTIPComponent)
@@ -78,12 +88,15 @@ type
   TApp42Provider = class(TCustomApp42Provider)
   published
     property ApiVersion;
- //   property ApplicationID;
     property ApiKey;
     property SecretKey;
-  //  property DBName;
+    property AdminKey;
     // App42/GCM not currently supported
     // property AndroidPush;
+    property ProxyPassword;
+    property ProxyPort;
+    property ProxyServer;
+    property ProxyUsername;
   end;
 
   TApp42BackendService = class(TInterfacedObject)
@@ -147,7 +160,7 @@ type
 
 implementation
 
-uses System.SysUtils, REST.Backend.App42MetaTypes;
+uses System.SysUtils, REST.Backend.App42MetaTypes, System.TypInfo, REST.Backend.Consts;
 
 { TCustomApp42Provider }
 
@@ -161,7 +174,7 @@ end;
 constructor TCustomApp42ConnectionInfo.Create(AOwner: TComponent);
 begin
   inherited;
-  FConnectionInfo := TApp42Api.TConnectionInfo.Create('', '');
+  FConnectionInfo := TApp42Api.TConnectionInfo.Create(TApp42Api.cDefaultApiVersion, '');
   FNotifyOnChange := TNotifyList.Create;
   FAndroidPush := TAndroidPush.Create;
 end;
@@ -183,11 +196,6 @@ begin
   Result := FConnectionInfo.ApiVersion;
 end;
 
-//function TCustomApp42ConnectionInfo.GetApplicationID: string;
-//begin
-//  Result := FConnectionInfo.ApplicationID;
-//end;
-
 function TCustomApp42ConnectionInfo.GetApiKey: string;
 begin
   Result := FConnectionInfo.ApiKey;
@@ -198,10 +206,30 @@ begin
   Result := FConnectionInfo.SecretKey;
 end;
 
-//function TCustomApp42ConnectionInfo.GetDBName: string;
-//begin
-//  Result := 'dfgdfg';
-//end;
+function TCustomApp42ConnectionInfo.GetAdminKey: string;
+begin
+  Result := FConnectionInfo.AdminKey;
+end;
+
+function TCustomApp42ConnectionInfo.GetProxyPassword: string;
+begin
+  Result := FConnectionInfo.ProxyPassword;
+end;
+
+function TCustomApp42ConnectionInfo.GetProxyPort: integer;
+begin
+  Result := FConnectionInfo.ProxyPort;
+end;
+
+function TCustomApp42ConnectionInfo.GetProxyServer: string;
+begin
+  Result := FConnectionInfo.ProxyServer;
+end;
+
+function TCustomApp42ConnectionInfo.GetProxyUsername: string;
+begin
+  Result := FConnectionInfo.ProxyUsername;
+end;
 
 procedure TCustomApp42ConnectionInfo.SetAndroidPush(const Value: TAndroidPush);
 begin
@@ -216,15 +244,6 @@ begin
     DoChanged;
   end;
 end;
-
-//procedure TCustomApp42ConnectionInfo.SetApplicationID(const Value: string);
-//begin
-//  if Value <> ApplicationID then
-//  begin
-//    FConnectionInfo.ApplicationID := Value;
-//    DoChanged;
-//  end;
-//end;
 
 procedure TCustomApp42ConnectionInfo.SetApiKey(const Value: string);
 begin
@@ -244,14 +263,50 @@ begin
   end;
 end;
 
-//procedure TCustomApp42ConnectionInfo.SetDBName(const Value: string);
-//begin
-//  if Value <> DBName then
-//  begin
-//    FConnectionInfo.DBName := Value;
-//    DoChanged;
-//  end;
-//end;
+procedure TCustomApp42ConnectionInfo.SetAdminKey(const Value: string);
+begin
+  if Value <> AdminKey then
+  begin
+    FConnectionInfo.AdminKey := Value;
+    DoChanged;
+  end;
+end;
+
+procedure TCustomApp42ConnectionInfo.SetProxyPassword(const Value: string);
+begin
+  if Value <> ProxyPassword then
+  begin
+    FConnectionInfo.ProxyPassword := Value;
+    DoChanged;
+  end;
+end;
+
+procedure TCustomApp42ConnectionInfo.SetProxyPort(const Value: integer);
+begin
+  if Value <> ProxyPort then
+  begin
+    FConnectionInfo.ProxyPort := Value;
+    DoChanged;
+  end;
+end;
+
+procedure TCustomApp42ConnectionInfo.SetProxyServer(const Value: string);
+begin
+  if Value <> ProxyServer then
+  begin
+    FConnectionInfo.ProxyServer := Value;
+    DoChanged;
+  end;
+end;
+
+procedure TCustomApp42ConnectionInfo.SetProxyUsername(const Value: string);
+begin
+  if Value <> ProxyUsername then
+  begin
+    FConnectionInfo.ProxyUsername := Value;
+    DoChanged;
+  end;
+end;
 
 procedure TCustomApp42ConnectionInfo.UpdateApi(const AApp42Api: TApp42Api);
 begin
@@ -400,6 +455,38 @@ end;
 
 { TApp42ServiceAPIAuth }
 
+function TApp42ServiceAPIAuth.GetAuthentication: TBackendAuthentication;
+begin
+  case App42API.Authentication of
+    TApp42Api.TAuthentication.Default:
+      Result := TBackendAuthentication.Default;
+    TApp42Api.TAuthentication.AdminKey:
+      Result := TBackendAuthentication.Root;
+    TApp42Api.TAuthentication.APIKey:
+       Result := TBackendAuthentication.Application;
+   TApp42Api.TAuthentication.Session:
+       Result := TBackendAuthentication.Session;
+  else
+    Assert(False);
+    Result := TBackendAuthentication.Default;
+  end;
+end;
+
+function TApp42ServiceAPIAuth.GetDefaultAuthentication: TBackendDefaultAuthentication;
+begin
+  case App42API.DefaultAuthentication of
+    TApp42Api.TDefaultAuthentication.APIKey:
+      Result := TBackendDefaultAuthentication.Application;
+    TApp42Api.TDefaultAuthentication.AdminKey:
+      Result := TBackendDefaultAuthentication.Root;
+    TApp42Api.TDefaultAuthentication.Session:
+      Result := TBackendDefaultAuthentication.Session;
+  else
+    Assert(False);
+    Result := TBackendDefaultAuthentication.Root;
+  end;
+end;
+
 procedure TApp42ServiceAPIAuth.Login(const ALogin: TBackendEntityValue);
 var
   LMetaLogin: TMetaLogin;
@@ -410,7 +497,7 @@ begin
     App42API.Login(LMetaLogin.Login);
   end
   else
-    raise Exception.Create('Parameter');
+    raise EArgumentException.Create(sParameterNotLogin);  // Do not localize
 end;
 
 procedure TApp42ServiceAPIAuth.Logout;
@@ -418,79 +505,46 @@ begin
   App42API.Logout;
 end;
 
-procedure TApp42ServiceAPIAuth.SetDefaultAuthentication(
-  ADefaultAuthentication: TBackendDefaultAuthentication);
-begin
-  case ADefaultAuthentication of
-    TBackendDefaultAuthentication.Root:
-      App42API.DefaultAuthentication := TApp42Api.TDefaultAuthentication.ApiKey;
-//    TBackendDefaultAuthentication.Application:
-//      TApp42Api.DefaultAuthentication := TApp42Api.TDefaultAuthentication.ApiVersion;
-//    TBackendDefaultAuthentication.Session:
-//      TApp42Api.DefaultAuthentication := TApp42Api.TDefaultAuthentication.Session;
-//    TBackendDefaultAuthentication.None:
-//      TApp42Api.DefaultAuthentication := TApp42Api.TDefaultAuthentication.None;
-//    TBackendDefaultAuthentication.User:
-//      raise EApp42APIError.CreateFmt(sAuthenticationNotSupported, [
-//        System.TypInfo.GetEnumName(TypeInfo(TBackendDefaultAuthentication), Integer(ADefaultAuthentication))]);
-  else
-    Assert(False);
-  end;
-end;
-
-function TApp42ServiceAPIAuth.GetDefaultAuthentication: TBackendDefaultAuthentication;
-begin
-  case App42API.DefaultAuthentication of
-    TApp42Api.TDefaultAuthentication.APIKey:
-      Result := TBackendDefaultAuthentication.Application;
-    TApp42Api.TDefaultAuthentication.ApiVersion:
-      Result := TBackendDefaultAuthentication.Root;
-//    TApp42Api.TDefaultAuthentication.Session:
-//      Result := TBackendDefaultAuthentication.Session;
-  else
-    Assert(False);
-    Result := TBackendDefaultAuthentication.Root;
-  end;
-end;
-
-
 procedure TApp42ServiceAPIAuth.SetAuthentication(
   AAuthentication: TBackendAuthentication);
 begin
   case AAuthentication of
     TBackendAuthentication.Default:
-      App42API.Authentication := TApp42API.TAuthentication.ApiKey;
-//    TBackendAuthentication.Root:
-//      App42API.Authentication := TApp42API.TAuthentication.ApiKey;
-//    TBackendAuthentication.Application:
-//      App42API.Authentication := TApp42API.TAuthentication.APIKey;
-//    TBackendAuthentication.Session:
-//      App42API.Authentication := TApp42API.TAuthentication.Session;
-//    TBackendAuthentication.None:
-//      App42API.Authentication := TApp42API.TAuthentication.None;
-//    TBackendAuthentication.User:
-//      raise EApp42APIError.CreateFmt(sAuthenticationNotSupported, [
-//        System.TypInfo.GetEnumName(TypeInfo(TBackendAuthentication), Integer(AAuthentication))]);
+      App42API.Authentication := TApp42Api.TAuthentication.Default;
+    TBackendAuthentication.Root:
+      App42API.Authentication := TApp42Api.TAuthentication.AdminKey;
+    TBackendAuthentication.Application:
+      App42API.Authentication := TApp42Api.TAuthentication.APIKey;
+    TBackendAuthentication.Session:
+      App42API.Authentication := TApp42Api.TAuthentication.Session;
+    TBackendAuthentication.None:
+      App42API.Authentication := TApp42Api.TAuthentication.None;
+    TBackendAuthentication.User:
+      raise EApp42APIError.CreateFmt(sAuthenticationNotSupported, [
+        System.TypInfo.GetEnumName(TypeInfo(TBackendAuthentication), Integer(AAuthentication))]);
   else
     Assert(False);
   end;
+
 end;
 
-
-  function TApp42ServiceAPIAuth.GetAuthentication : TBackendAuthentication;
+procedure TApp42ServiceAPIAuth.SetDefaultAuthentication(
+  ADefaultAuthentication: TBackendDefaultAuthentication);
 begin
-  case App42Api.Authentication of
-    TApp42Api.TAuthentication.ApiKey:
-      Result := TBackendAuthentication.Default;
-    TApp42Api.TAuthentication.ApiVersion:
-      Result := TBackendAuthentication.Root;
-//    TApp42Api.TAuthentication.APIKey:
-//       Result := TBackendAuthentication.Application;
-//   TApp42Api.TAuthentication.Session:
-//       Result := TBackendAuthentication.Session;
+  case ADefaultAuthentication of
+    TBackendDefaultAuthentication.Root:
+      App42API.DefaultAuthentication := TApp42Api.TDefaultAuthentication.AdminKey;
+    TBackendDefaultAuthentication.Application:
+      App42API.DefaultAuthentication := TApp42Api.TDefaultAuthentication.APIKey;
+    TBackendDefaultAuthentication.Session:
+      App42API.DefaultAuthentication := TApp42Api.TDefaultAuthentication.Session;
+    TBackendDefaultAuthentication.None:
+      App42API.DefaultAuthentication := TApp42Api.TDefaultAuthentication.None;
+    TBackendDefaultAuthentication.User:
+      raise EApp42APIError.CreateFmt(sAuthenticationNotSupported, [
+        System.TypInfo.GetEnumName(TypeInfo(TBackendDefaultAuthentication), Integer(ADefaultAuthentication))]);
   else
     Assert(False);
-    Result := TBackendAuthentication.Default;
   end;
 end;
 
@@ -499,3 +553,4 @@ initialization
 finalization
   TBackendProviders.Instance.UnRegister(TCustomApp42Provider.ProviderID);
 end.
+

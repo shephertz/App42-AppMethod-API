@@ -5,6 +5,7 @@
 { Copyright(c) 2014 Embarcadero Technologies, Inc.      }
 {                                                       }
 {*******************************************************}
+{$HPPEMIT LINKUNIT}
 unit REST.Backend.App42Services;
 
 interface
@@ -133,7 +134,7 @@ implementation
 
 uses
   System.TypInfo, System.Generics.Collections, REST.Backend.ServiceFactory,
-  REST.Backend.App42MetaTypes;
+  REST.Backend.App42MetaTypes, REST.Backend.Consts, REST.Backend.Exception;
 
 type
   TApp42ProviderServiceFactory<T: IBackendService> = class(TProviderServiceFactory<T>)
@@ -240,7 +241,7 @@ begin
     App42API.QueryInstallation(
       AQuery, AJSONArray)
   else
-    raise Exception.CreateFmt('Unsupport query type: %s', [AClass.BackendDataType]);
+    raise EBackendServiceError.CreateFmt(sUnsupportedBackendQueryType, [AClass.BackendDataType]);
 end;
 
 procedure TApp42QueryAPI.Query(const AClass: TBackendMetaClass;
@@ -263,7 +264,7 @@ begin
     App42API.QueryInstallation(
       AQuery, AJSONArray, LObjectIDArray)
   else
-    raise Exception.CreateFmt('Unsupport query type: %s', [AClass.BackendDataType]);
+    raise EBackendServiceError.CreateFmt(sUnsupportedBackendQueryType, [AClass.BackendDataType]);
 
   if Length(LUsersArray) > 0 then
   begin
@@ -304,8 +305,6 @@ begin
   Result := FBackendAPI;
 end;
 
-{ TApp42UsersAPI }
-
 { TApp42UsersService }
 
 function TApp42UsersService.CreateUsersApi: IBackendUsersApi;
@@ -337,7 +336,7 @@ begin
   if AObject.Data is TMetaObject then
     Result := App42API.DeleteClass((AObject.Data as TMetaObject).ObjectID)
   else
-    raise Exception.Create('Parameter');
+    raise EArgumentException.Create(sParameterNotMetaType);
 end;
 
 function TApp42StorageAPI.FindObject(const AObject: TBackendEntityValue;
@@ -355,7 +354,7 @@ begin
       end);
   end
   else
-    raise Exception.Create('Parameter');
+    raise EArgumentException.Create(sParameterNotMetaType);
 end;
 
 function TApp42StorageAPI.GetMetaFactory: IBackendMetaFactory;
@@ -404,7 +403,7 @@ begin
     AUpdatedObject := TApp42MetaFactory.CreateMetaUpdatedObject(LObjectID);
   end
   else
-    raise Exception.Create('Parameter');
+    raise EArgumentException.Create(sParameterNotMetaType);
 end;
 
 { TApp42StorageService }
@@ -489,7 +488,7 @@ begin
   else if AObject.Data is TMetaUser then
     Result := App42API.DeleteUser((AObject.Data as TMetaUser).User.ObjectID)
   else
-    raise Exception.Create('Parameter');
+    raise EArgumentException.Create(sParameterNotMetaType);
 end;
 
 function TApp42UsersAPI.FindUser(const AObject: TBackendEntityValue;
@@ -512,7 +511,7 @@ begin
       end);
   end
   else
-    raise Exception.Create('Parameter');
+    raise EArgumentException.Create(sParameterNotMetaType);
 end;
 
 function TApp42UsersAPI.FindUser(const AObject: TBackendEntityValue;
@@ -525,7 +524,7 @@ begin
   else if AObject.Data is TMetaUser then
     Result := App42API.RetrieveUser(TMetaUser(AObject.Data).User.ObjectID, LUser, AJSON)
   else
-    raise Exception.Create('Parameter');
+    raise EArgumentException.Create(sParameterNotMetaType);
 
   AUser := TApp42MetaFactory.CreateMetaFoundUser(LUser);
 end;
@@ -555,7 +554,7 @@ begin
     end;
   end
   else
-    raise Exception.Create('Parameter');
+    raise EArgumentException.Create(sParameterNotMetaType);
 end;
 
 function TApp42UsersAPI.FindCurrentUser(const AObject: TBackendEntityValue;
@@ -576,7 +575,7 @@ begin
     end;
   end
   else
-    raise Exception.Create('Parameter');
+    raise EArgumentException.Create(sParameterNotMetaType);
 end;
 
 procedure TApp42UsersAPI.LoginUser(const AUserName, APassword: string;
@@ -674,7 +673,7 @@ begin
     AUpdatedObject := TApp42MetaFactory.CreateMetaUpdatedUser(LUpdated);
   end
   else
-    raise Exception.Create('Parameter');
+    raise EArgumentException.Create(sParameterNotMetaType);
 end;
 
 { TApp42FilesAPI }
@@ -700,7 +699,7 @@ begin
     Result := App42API.DeleteFile(LMetaFile.FileValue);
   end
   else
-    raise Exception.Create('Parameter');
+    raise EArgumentException.Create(sParameterNotMetaType);
 end;
 
 function TApp42FilesAPI.GetMetaFactory: IBackendMetaFactory;
@@ -725,3 +724,4 @@ finalization
   UnregisterServices;
 
 end.
+
