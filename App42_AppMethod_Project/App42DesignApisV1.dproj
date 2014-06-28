@@ -96,7 +96,7 @@
         <DCC_UsePackage>rtl;$(DCC_UsePackage)</DCC_UsePackage>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
-        <DCC_UsePackage>rtl;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>rtl;App42APIs;$(DCC_UsePackage)</DCC_UsePackage>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -141,12 +141,12 @@
         <DCCReference Include="rtl.dcp"/>
         <DCCReference Include="DesignIDE.dcp"/>
         <DCCReference Include="App42Apis.dcp"/>
-        <DCCReference Include="..\ZAAZ\REST.Backend.App42Api.pas"/>
-        <DCCReference Include="..\ZAAZ\REST.Backend.App42MetaTypes.pas"/>
-        <DCCReference Include="..\ZAAZ\REST.Backend.App42Provider.pas"/>
-        <DCCReference Include="..\ZAAZ\REST.Backend.App42PushDevice.pas"/>
-        <DCCReference Include="..\ZAAZ\REST.Backend.App42Services.pas"/>
-        <DCCReference Include="..\ZAAZ\REST.Backend.ComponentRegistration.App42.pas"/>
+        <DCCReference Include="src\REST.Backend.App42Api.pas"/>
+        <DCCReference Include="src\REST.Backend.App42MetaTypes.pas"/>
+        <DCCReference Include="src\REST.Backend.App42Provider.pas"/>
+        <DCCReference Include="src\REST.Backend.App42PushDevice.pas"/>
+        <DCCReference Include="src\REST.Backend.App42Services.pas"/>
+        <DCCReference Include="src\REST.Backend.ComponentRegistration.App42.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

@@ -36,11 +36,11 @@ requires
   App42Apis;
 
 contains
-  REST.Backend.App42Api in 'src\REST.Backend.App42Api.pas',
-  REST.Backend.App42MetaTypes in 'src\REST.Backend.App42MetaTypes.pas',
-  REST.Backend.App42Provider in 'src\REST.Backend.App42Provider.pas',
-  REST.Backend.App42PushDevice in 'src\REST.Backend.App42PushDevice.pas',
-  REST.Backend.App42Services in 'src\REST.Backend.App42Services.pas',
-  REST.Backend.ComponentRegistration.App42 in 'src\REST.Backend.ComponentRegistration.App42.pas';
+  REST.Backend.App42Api in '..\ZAAZ\REST.Backend.App42Api.pas',
+  REST.Backend.App42MetaTypes in '..\ZAAZ\REST.Backend.App42MetaTypes.pas',
+  REST.Backend.App42Provider in '..\ZAAZ\REST.Backend.App42Provider.pas',
+  REST.Backend.App42PushDevice in '..\ZAAZ\REST.Backend.App42PushDevice.pas',
+  REST.Backend.App42Services in '..\ZAAZ\REST.Backend.App42Services.pas',
+  REST.Backend.ComponentRegistration.App42 in '..\ZAAZ\REST.Backend.ComponentRegistration.App42.pas';
 
 end.
