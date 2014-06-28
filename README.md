@@ -1,4 +1,4 @@
-App42-AppMethod-API
+# App42-AppMethod-API
 
 # Register and Create App
 
@@ -22,7 +22,7 @@ Here are the following steps to get started with App42 platform
 
 * Go to Component -> Install Package in the [AppMethod IDE](http://docwiki.appmethod.com/appmethod/1.13/topics/en/Install_Component)
 
-* Click the "Add.." button, now you have to navigate to the unzip folder where the Package Library file (App42_AppMethod_Component.bpl) are found and click the 'Open' button to add the component package to the IDE. 
+* Click the "Add.." button, now you have to navigate to the unzip folder where the Package Library file (dclApp42DesignApisVxxx.bpl) are found and click the 'Open' button to add the component package to the IDE. 
 
 * Now the TApp42Provider component is added in BaaS Client category in Tool Pallete.
 
@@ -36,3 +36,4 @@ Here are the following steps to get started with App42 platform
 
 * Now you are ready to use App42 services in your project.
 
+* You can also build and run (AppMethod Sample)[https://github.com/shephertz/App42-AppMethod-API/tree/master/sample/App42_AppMethod_Sample] available under sample folder of unzipped folder to get started quickly. 
