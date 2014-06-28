@@ -1,0 +1,46 @@
+package App42DesignApisV1;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE RELEASE}
+{$ENDIF IMPLICITBUILDING}
+{$LIBPREFIX 'dcl'}
+{$LIBSUFFIX '200'}
+{$DESIGNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  DesignIDE,
+  App42Apis;
+
+contains
+  REST.Backend.App42Api in '..\ZAAZ\REST.Backend.App42Api.pas',
+  REST.Backend.App42MetaTypes in '..\ZAAZ\REST.Backend.App42MetaTypes.pas',
+  REST.Backend.App42Provider in '..\ZAAZ\REST.Backend.App42Provider.pas',
+  REST.Backend.App42PushDevice in '..\ZAAZ\REST.Backend.App42PushDevice.pas',
+  REST.Backend.App42Services in '..\ZAAZ\REST.Backend.App42Services.pas',
+  REST.Backend.ComponentRegistration.App42 in '..\ZAAZ\REST.Backend.ComponentRegistration.App42.pas';
+
+end.
