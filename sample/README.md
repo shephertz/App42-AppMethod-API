@@ -1,29 +1,11 @@
 App42-AppMethod-API
 ===================
 
-App42 APIs for AppMethod
+# Steps to use sample : 
 
-1. Unzip the downloaded folder.
-2. Open App42REST.groupproj in Rad Studio.
-3. Compile and install the ___dclRESTBackendComponentsApp42200.bpl___.
-4. Compile and install the ___dclRESTBackendComponentsApp42.bpl___.
-5. Now the TApp42Provider component is installed in BAAS Client category in Tool Pallete.
-6. Drag and Drop the TApp42Provider component in design view of App.
-8. Set the Credentials in ___Object Inspector___.
-7. Put the ApiVersion as ___1.0___ and register with [AppHQ] (http://apphq.shephertz.com/register/app42Login).
-8. Make an ACL enabled app in AppHQ Console for ___ADMIN_KEY___, ___API_KEY___ and ___SECRET_KEY___.
-8. Select the provider as ___App42Provider1___ for the backend service component(i.e TBackendUsers).
-
-
-**ACL USAGE**
-
-For using ACL, Just make a TJSONObject or Json String and pass the key value pairs as described below. 
-```
-{"PUBLIC":"R", "PUBLIC":"W"}  // for giving the Read and Write Permission to Public (PUBLIC must be in caps).
-
-{"PUBLIC":"R", "elmo":"W", "elmo":"R"}  // for giving the Read Permission to Public and Read/Write for user elmo.
-
-{"elmo":"W", "elmo":"R"}  // Private Document for user elmo.
-
-{"elmo":"W", "elmo":"R", "bert":"R"}  // user elmo can Read/Write and user bert can only read.
-```
+1. [Register] (https://apphq.shephertz.com/register) with App42 platform the go to dashboard.
+2. If you are already registered, login to [AppHQ] (http://apphq.shephertz.com/register/app42Login) console and create an ACL enabled app from App Manager Tab, now you have API_KEY, SECRET_KEY and ADMIN_KEY.
+3. [Download](https://github.com/shephertz/App42-AppMethod-API/archive/master.zip)  __App42 AppMethod Api__ and unzip it on your local machine.
+4. Open the sample project through Rad Studio XE6.
+5. Put the Apikey, AdminKey and SecretKey in object inspector.
+6. Run the project.
