@@ -36,4 +36,4 @@ Here are the following steps to get started with App42 platform
 
 * Now you are ready to use App42 services in your project.
 
-* You can also build and run [AppMethod Sample](https://github.com/shephertz/App42-AppMethod-API/tree/master/sample/App42_AppMethod_Sample) available under sample folder of unzipped folder to get started quickly. 
+* You can also build and run [AppMethod Sample](https://github.com/shephertz/App42-AppMethod-API/tree/master/sample) available under sample folder of unzipped folder to get started quickly. 
