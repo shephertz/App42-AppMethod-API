@@ -2,28 +2,28 @@
 <BorlandProject>
 	<Transactions>
     <Transaction>2014/06/28 14:36:03.000.737,=rtl.dcp</Transaction>
-    <Transaction>2014/06/28 14:37:21.000.028,C:\Users\App42Admin\Desktop\FINALFIGHT\App42APIs.dproj=C:\Users\App42Admin\Documents\Embarcadero\Studio\Projects\Package2.dproj</Transaction>
-    <Transaction>2014/06/28 15:00:31.000.598,=C:\Users\App42Admin\Desktop\ZAAZ\REST.Backend.App42PushDevice.pas</Transaction>
+    <Transaction>2014/06/28 14:37:21.000.028,C:\Users\App42Admin\Documents\Embarcadero\Studio\Projects\Package2.dproj=C:\Users\App42Admin\Desktop\FINALFIGHT\App42APIs.dproj</Transaction>
     <Transaction>2014/06/28 15:00:31.000.495,=C:\Users\App42Admin\Desktop\ZAAZ\REST.Backend.App42Api.pas</Transaction>
-    <Transaction>2014/06/28 15:00:31.000.578,=C:\Users\App42Admin\Desktop\ZAAZ\REST.Backend.App42Provider.pas</Transaction>
+    <Transaction>2014/06/28 15:00:31.000.598,=C:\Users\App42Admin\Desktop\ZAAZ\REST.Backend.App42PushDevice.pas</Transaction>
     <Transaction>2014/06/28 15:00:31.000.531,=C:\Users\App42Admin\Desktop\ZAAZ\REST.Backend.App42MetaTypes.pas</Transaction>
+    <Transaction>2014/06/28 15:00:31.000.578,=C:\Users\App42Admin\Desktop\ZAAZ\REST.Backend.App42Provider.pas</Transaction>
     <Transaction>2014/06/28 15:00:31.000.628,=C:\Users\App42Admin\Desktop\ZAAZ\REST.Backend.App42Services.pas</Transaction>
-    <Transaction>2014/06/28 15:03:31.000.207,=soaprtl.dcp</Transaction>
-    <Transaction>2014/06/28 15:03:31.000.186,=CustomIPTransport.dcp</Transaction>
-    <Transaction>2014/06/28 15:03:31.000.319,=RESTBackendComponents.dcp</Transaction>
-    <Transaction>2014/06/28 15:03:31.000.306,=RESTComponents.dcp</Transaction>
-    <Transaction>2014/06/28 15:03:31.000.257,=IndyProtocols.dcp</Transaction>
     <Transaction>2014/06/28 15:03:31.000.240,=IndySystem.dcp</Transaction>
-    <Transaction>2014/06/28 15:03:31.000.285,=IndyCore.dcp</Transaction>
-    <Transaction>2014/06/28 15:03:31.000.229,=bindcomp.dcp</Transaction>
+    <Transaction>2014/06/28 15:03:31.000.207,=soaprtl.dcp</Transaction>
+    <Transaction>2014/06/28 15:03:31.000.198,=inet.dcp</Transaction>
+    <Transaction>2014/06/28 15:03:31.000.306,=RESTComponents.dcp</Transaction>
+    <Transaction>2014/06/28 15:03:31.000.186,=CustomIPTransport.dcp</Transaction>
+    <Transaction>2014/06/28 15:03:31.000.257,=IndyProtocols.dcp</Transaction>
+    <Transaction>2014/06/28 15:03:31.000.174,=dbrtl.dcp</Transaction>
     <Transaction>2014/06/28 15:03:31.000.150,=xmlrtl.dcp</Transaction>
     <Transaction>2014/06/28 15:03:31.000.218,=bindengine.dcp</Transaction>
-    <Transaction>2014/06/28 15:03:31.000.174,=dbrtl.dcp</Transaction>
-    <Transaction>2014/06/28 15:03:31.000.198,=inet.dcp</Transaction>
+    <Transaction>2014/06/28 15:03:31.000.229,=bindcomp.dcp</Transaction>
+    <Transaction>2014/06/28 15:03:31.000.285,=IndyCore.dcp</Transaction>
+    <Transaction>2014/06/28 15:03:31.000.319,=RESTBackendComponents.dcp</Transaction>
     <Transaction>2014/06/28 15:05:36.000.367,C:\Users\App42Admin\Desktop\ZAAZ\REST.Backend.App42Provider.pas=</Transaction>
-    <Transaction>2014/06/28 15:05:36.000.379,C:\Users\App42Admin\Desktop\ZAAZ\REST.Backend.App42PushDevice.pas=</Transaction>
     <Transaction>2014/06/28 15:05:36.000.317,C:\Users\App42Admin\Desktop\ZAAZ\REST.Backend.App42Api.pas=</Transaction>
-    <Transaction>2014/06/28 15:05:36.000.390,C:\Users\App42Admin\Desktop\ZAAZ\REST.Backend.App42Services.pas=</Transaction>
+    <Transaction>2014/06/28 15:05:36.000.379,C:\Users\App42Admin\Desktop\ZAAZ\REST.Backend.App42PushDevice.pas=</Transaction>
     <Transaction>2014/06/28 15:05:36.000.350,C:\Users\App42Admin\Desktop\ZAAZ\REST.Backend.App42MetaTypes.pas=</Transaction>
+    <Transaction>2014/06/28 15:05:36.000.390,C:\Users\App42Admin\Desktop\ZAAZ\REST.Backend.App42Services.pas=</Transaction>
   </Transactions>
 </BorlandProject>

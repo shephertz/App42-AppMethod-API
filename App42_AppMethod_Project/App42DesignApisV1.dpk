@@ -25,15 +25,12 @@ package App42DesignApisV1;
 {$IMAGEBASE $400000}
 {$DEFINE RELEASE}
 {$ENDIF IMPLICITBUILDING}
-{$LIBPREFIX 'dcl'}
-{$LIBSUFFIX '200'}
 {$DESIGNONLY}
 {$IMPLICITBUILD ON}
 
 requires
-  rtl,
-  DesignIDE,
-  App42Apis;
+  App42APIs,
+  rtl;
 
 contains
   REST.Backend.App42Api in 'src\REST.Backend.App42Api.pas',
