@@ -48,7 +48,6 @@ type
   cDefaultApiVersion = '1.0';  // do not localize
   cDefaultBaseURL = 'https://api.shephertz.com/cloud/1.0/'; // do not localize
   public type
-
     TDeviceNames = record
     public
       const IOS = 'ios';
@@ -289,7 +288,6 @@ type
     function ConverAndSortParamsToString(const SignParamsDic: TDictionary<string,string>): string;
     function GetUTCFormattedTime(const ACurrentTime: TDateTime): string;
     function RootNodeFromResponse(const AResponse: TJSONObject) : TJSONObject;
-  published
   end;
 
  var
@@ -508,13 +506,13 @@ end;
 procedure TApp42Api.AddAuthParameters(AAuthentication: TAuthentication);
 var
   Today : TDateTime;
-  TimeZone: TTimeZone;
   LApp42Utils: TApp42Utils;
   LTimeStampStr: string;
 begin
-  Today:= TimeZone.Local.ToUniversalTime(Now);
+  Today:= TTimeZone.Local.ToUniversalTime(Now);
+  LApp42Utils := TApp42Utils.Create;
   LTimeStampStr:= LApp42Utils.GetUTCFormattedTime(Today);
-// Adding Adding ApiKey, TimeStamp, Version for making client request Signature.
+// Adding ApiKey, TimeStamp, Version for making client request Signature.
   SignParamsDics:= TDictionary<string,string>.create;
   SignParamsDics.Add(sApiKey,FConnectionInfo.ApiKey);
   SignParamsDics.Add(sTimestamp,LTimeStampStr);
@@ -637,6 +635,7 @@ try
   SignParamsDics.Add('dbName',sDBName);
   SignParamsDics.Add('collectionName',ABackendClassName);
   SignParamsDics.Add('docId',AObjectID);
+  LApp42Utils := TApp42Utils.Create;
   LSignature := LApp42Utils.Sign(SignParamsDics,FConnectionInfo.SecretKey);
   Request.Params.AddHeader('signature',LSignature);
   LResource := sStorage + '/deleteDocById/dbName/' + sDBName + '/collectionName/' + ABackendClassName + '/docId/' + AObjectID;
@@ -706,7 +705,7 @@ var
   LSignature: string;
   I: Integer;
   LJSONValue: TJSONValue;
-  LResponse,LApp42,LSuccess,LStorage,LJsonDoc,LId: TJSONObject;
+  LResponse,LApp42,LSuccess,LStorage: TJSONObject;
 
   LQueryString: string;
   LExpressionJson: TJSONObject;
@@ -721,7 +720,7 @@ var
   var
   J:Integer;
   begin
-  J:=0;
+ // J:=0;
    J := S.IndexOf('=');
    if J > 0 then
     Request.Params.AddHeader(S.Substring(0, J).Trim, S.Substring(J+1).Trim);
@@ -733,9 +732,11 @@ begin
     AddAuthParameters;
   end;
   FRequest.Method := TRESTRequestMethod.rmGET;
-try
+  LApp42Utils := TApp42Utils.Create;
  LExpressionJsonArray:= TJSONArray.Create;
- LCompoundExpressionArray := TJSONArray.Create;
+// LCompoundExpressionArray := TJSONArray.Create;
+ LExpressionJson2 := nil;
+try
  LNotRepeated := true;
  I:=0;
    if Length(AQuery) > 1 then
@@ -753,25 +754,26 @@ try
   else if I<=2 then
   begin
   I:=I+1;
-  LExpressionJson := TJSONObject.Create;
-    LExpressionJson := LApp42Utils.BuildQueryString(S);
-    LExpressionJsonArray.AddElement(LExpressionJson);
+ // LExpressionJson := TJSONObject.Create;
+  LExpressionJson := LApp42Utils.BuildQueryString(S);
+  LExpressionJsonArray.AddElement(LExpressionJson);
   end
   else
   begin
   if LNotRepeated  then
   begin
   LNotRepeated := false;
-  LExpressionJson2 := TJSONObject.Create;
+ // LExpressionJson2 := TJSONObject.Create;
   LExpressionJson2 := LApp42Utils.BuildQueryString(S);
   end
   else
   begin
-  LExpressionJson3 := TJSONObject.Create;
+ // LExpressionJson3 := TJSONObject.Create;
   LExpressionJson3 := LApp42Utils.BuildQueryString(S);
   LNotRepeated := true;
   LCompoundExpressionArray := LApp42Utils.BuildCompoundQueryString(LExpressionJsonArray,LExpressionJson2,LExpressionJson3);
   LExpressionJsonArray := LCompoundExpressionArray;
+
  end;
   end;
   end;
@@ -791,7 +793,7 @@ try
   AddMetaHeaders(S)
   else
   begin
-    LExpressionJson := TJSONObject.Create;
+  //  LExpressionJson := TJSONObject.Create;
     LExpressionJson := LApp42Utils.BuildQueryString(S);
     LExpressionJsonArray.AddElement(LExpressionJson);
   end;
@@ -816,6 +818,7 @@ end;
 try
     SignParamsDics.Add('collectionName',ACollection);
     SignParamsDics.Add('dbName',sDBName);
+    LApp42Utils := TApp42Utils.Create;
     LSignature := LApp42Utils.Sign(SignParamsDics,FConnectionInfo.SecretKey);
     Request.Params.AddHeader('signature',LSignature);
 
@@ -902,6 +905,7 @@ try
   SignParamsDics.Add('dbName',sDBName);
   SignParamsDics.Add('collectionName',ABackendClassName);
   SignParamsDics.Add('docId',AObjectID);
+  LApp42Utils := TApp42Utils.Create;
   LSignature := LApp42Utils.Sign(SignParamsDics,FConnectionInfo.SecretKey);
   Request.Params.AddHeader('signature',LSignature);
   FRequest.Method := TRESTRequestMethod.rmGET;
@@ -1002,12 +1006,13 @@ var
   LJSON: TJSONObject;
   LDevices : TJSONArray;
   Today : TDateTime;
-  TimeZone: TTimeZone;
+//  TimeZone: TTimeZone;
   LTimeStampStr: string;
   LSignature, LBody: string;
   LApp42Utils: TApp42Utils;
 begin
-  Today:= TimeZone.Local.ToUniversalTime(Now);
+  LApp42Utils := TApp42Utils.Create;
+  Today:= TTimeZone.Local.ToUniversalTime(Now);
   LTimeStampStr:= LApp42Utils.GetUTCFormattedTime(Today);
   LJSON := TJSONObject.Create;
   LDevices := TJSONArray.Create;
@@ -1027,6 +1032,7 @@ begin
   // Adding Information About Request for creating client signature.
   SignParamsDics.Add('body',LBody);
   SignParamsDics.Add('jsonQuery',LDevices.ToString);
+  LApp42Utils := TApp42Utils.Create;
   LSignature := LApp42Utils.Sign(SignParamsDics,FConnectionInfo.SecretKey);
   // Adding Signature To The Headers Of Request.
   Request.Params.AddHeader('signature',LSignature);
@@ -1043,11 +1049,8 @@ end;
 
 procedure TApp42Api.PushToDevices(const ADevices: array of string; const AData: TJSONObject);
 var
-  LDevices: TJSONArray;
-  LWhere: TJSONObject;
-  LQuery: TJSONObject;
-  LJSON, LExpression : TJSONObject;
-  LBody, S, SS: string;
+  LExpression : TJSONObject;
+  S : string;
   LString : TStringBuilder;
 begin
   if Length(ADevices) = 0 then
@@ -1057,7 +1060,6 @@ begin
     LString.Append(S);
     LString.Append(']');
 
-  LDevices := TJSONArray.Create;
   LExpression := TJSONObject.Create;
   LExpression.AddPair('key','pushDeviceType');
   LExpression.AddPair('operator','$in');
@@ -1141,6 +1143,7 @@ function TApp42Api.UserFromObject(const AUserName: string; const AJSONObject: TJ
 var
 LUserObjectId: TJSONObject;
 begin
+  LUserObjectId := TJSONObject.Create;
   Result := TUser.Create(AUserName);
   if AJSONObject.GetValue('_$createdAt') <> nil then      // Do not localize
     Result.FCreatedAt := TJSONDates.AsDateTime(AJSONObject.GetValue('_$createdAt'), TJSONDates.TFormat.ISO8601, DateTimeIsUTC);   // Do not localize
@@ -1199,20 +1202,24 @@ var
   I: Integer;
   LList: TList<TJSONPair>;
   begin
+
 // Creating ACL JSONObjects Array as App42 Accepts. [{"PUBLIC":"R"},{"PUBLIC":"W"},{"userName":"W"},{"userName":"R"}].
     LACLArray := TJSONArray.Create;
-      for I := 0 to AACL.Size - 1 do
+      for I := 0 to AACL.Count - 1 do
     begin
-      LACLPair := AACL.Get(I);
+      LACLPair := AACL.Pairs[I];
       LACLObj := TJSONObject.Create;
       LList := TList<TJSONPair>.Create;
+      try
       LList.Add(LACLPair);
       LACLObj.SetPairs(LList);
       LACLArray.AddElement(LACLObj);
+      finally
+        LList.Free;
+      end;
     end;
     Request.Params.AddHeader('dataACL',LACLArray.ToString);     // Do not localize
   end;
-
 begin
   FRequest.ResetToDefaults;
   AddAuthParameters;
@@ -1241,6 +1248,7 @@ begin
     SignParamsDics.Add('body',LBody);
     SignParamsDics.Add('collectionName',ABackendClassName);
     SignParamsDics.Add('dbName',sDBName);
+    LApp42Utils := TApp42Utils.Create;
     LSignature := LApp42Utils.Sign(SignParamsDics,FConnectionInfo.SecretKey);
     // Adding Signature To The Headers Of Request.
     Request.Params.AddHeader('signature',LSignature);
@@ -1287,6 +1295,7 @@ try
   SignParamsDics.Add('collectionName',ABackendClassName);
   SignParamsDics.Add('dbName',sDBName);
   SignParamsDics.Add('docId',AObjectID);
+  LApp42Utils := TApp42Utils.Create;
   LSignature := LApp42Utils.Sign(SignParamsDics,FConnectionInfo.SecretKey);
   Request.Params.AddHeader('signature',LSignature);
   LResource := sStorage + '/updateKeysByDocId/dbName/' + sDBName + '/collectionName/' + ABackendClassName + '/docId/' + AObjectID;
@@ -1340,12 +1349,12 @@ var
   Params: TIdMultipartFormDataStream;
   http: TIdHTTP;
   Today : TDateTime;
-  TimeZone: TTimeZone;
   LHandler: TIdSSLIOHandlerSocketOpenSSL;
   LContentType: TRESTContentType;
 begin
   http:=TIdHTTP.Create(nil);
-  Today:= TimeZone.Local.ToUniversalTime(Now);
+  Today:= TTimeZone.Local.ToUniversalTime(Now);
+  LApp42Utils := TApp42Utils.Create;
   LTimeStampStr:= LApp42Utils.GetUTCFormattedTime(Today);
   http.Request.CustomHeaders.AddValue(sTimestamp,LTimeStampStr);
   SignParamsDics:= TDictionary<string,string>.create;
@@ -1362,6 +1371,8 @@ begin
   SignParamsDics.Add(sApiKey,FConnectionInfo.ApiKey);
   SignParamsDics.Add(sTimestamp,LTimeStampStr);
   SignParamsDics.Add(sApiVersion,FConnectionInfo.ApiVersion);
+  LHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
+ Params:=Tidmultipartformdatastream.Create;
 try
   LUniqeFileId := LTimeStampStr.Replace(':','e').Replace('-','a').Replace('.','b').Replace('20','f').Replace('1','i').Replace('4','');
 
@@ -1369,19 +1380,17 @@ try
     LContentType := TRESTContentType.ctAPPLICATION_OCTET_STREAM
   else
     LContentType :=  ContentTypeFromString(AContentType);
-
   SignParamsDics.Add('type', ContentTypeToString(LContentType));
   SignParamsDics.Add('name',LUniqeFileId);
   SignParamsDics.Add('description',AFileName);
+  LApp42Utils := TApp42Utils.Create;
   LSignature := LApp42Utils.Sign(SignParamsDics, FConnectionInfo.SecretKey);
   http.Request.CustomHeaders.AddValue('signature',LSignature);
 
-   Params:=Tidmultipartformdatastream.Create;
    Params.AddFormField('uploadFile', ContentTypeToString(LContentType), '', AStream, AFileName);
    Params.AddFormField('name',LUniqeFileId);
    Params.AddFormField('type', ContentTypeToString(LContentType));
    Params.AddFormField('description',AFileName);
-  LHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
   http.IOHandler:=LHandler;
   http.Request.Accept := 'application/json';
   http.Request.CustomHeaders.AddValue(sApiKey, FConnectionInfo.ApiKey);
@@ -1411,6 +1420,7 @@ try
    AddAuthParameters;
    AddAdminKey(FConnectionInfo.AdminKey);
     SignParamsDics.Add('name',AFileID.Name);
+    LApp42Utils := TApp42Utils.Create;
     LSignature := LApp42Utils.Sign(SignParamsDics,FConnectionInfo.SecretKey);
     Request.Params.AddHeader('signature',LSignature);
   Result := DeleteResource(sFiles + '/' + AFileID.Name, False);
@@ -1458,6 +1468,7 @@ try
   SignParamsDics.Add('dbName', sDBName);
   SignParamsDics.Add('collectionName', sUserCollectionName);
   SignParamsDics.Add('docId', AObjectID);
+  LApp42Utils := TApp42Utils.Create;
   LSignature := LApp42Utils.Sign(SignParamsDics,FConnectionInfo.SecretKey);
   Request.Params.AddHeader('signature', LSignature);
   LResource := sStorage + '/deleteDocById/dbName/' + sDBName + '/collectionName/' + sUserCollectionName + '/docId/' + AObjectID;
@@ -1494,6 +1505,7 @@ try
   SignParamsDics.Add('dbName', sDBName);
   SignParamsDics.Add('collectionName', sUserCollectionName);
   SignParamsDics.Add('docId', ALogin.User.ObjectID);
+  LApp42Utils := TApp42Utils.Create;
   LSignature := LApp42Utils.Sign(SignParamsDics,FConnectionInfo.SecretKey);
   Request.Params.AddHeader('signature', LSignature);
   LResource := sStorage + '/deleteDocById/dbName/' + sDBName + '/collectionName/' + sUserCollectionName + '/docId/' + ALogin.User.ObjectID;
@@ -1528,15 +1540,16 @@ begin
 try
   Result := False;
   CheckObjectID(AObjectID);
-    FRequest.ResetToDefaults;
-    AddAuthParameters;
-    if ASessionID <> '' then
-    AddSessionToken(ASessionID);
+  FRequest.ResetToDefaults;
+  AddAuthParameters;
+  if ASessionID <> '' then
+  AddSessionToken(ASessionID);
   FRequest.Method := TRESTRequestMethod.rmGET;
   FRequest.Resource := sStorage + '/findDocById/dbName/' + sDBName + '/collectionName/' + sUserCollectionName + '/docId/' + AObjectID;
   SignParamsDics.Add('dbName',sDBName);
   SignParamsDics.Add('collectionName', sUserCollectionName);
   SignParamsDics.Add('docId',AObjectID);
+  LApp42Utils := TApp42Utils.Create;
   LSignature := LApp42Utils.Sign(SignParamsDics,FConnectionInfo.SecretKey);
   Request.Params.AddHeader('signature',LSignature);
   FRequest.Execute;
@@ -1576,6 +1589,7 @@ try
   else
   LSessionId:= FSessionToken;
   FRequest.Resource := sSession + '/id/' + LSessionId;
+  LApp42Utils := TApp42Utils.Create;
   LSignature := LApp42Utils.Sign(SignParamsDics,FConnectionInfo.SecretKey);
   Request.Params.AddHeader('signature',LSignature);
   FRequest.Execute;
@@ -1659,9 +1673,9 @@ var
   LUser: TJSONObject;
 begin
     LUser := UserFromUserName(AUserName);
-    if LUser = nil then
-    Result := LUser <> nil
-    else
+    if LUser <> nil then
+//    Result := LUser <> nil
+//    else
     begin
      AUser := UserFromObject(AUserName, LUser);
     if Assigned(AJSON) then
@@ -1669,7 +1683,7 @@ begin
     if Assigned(AProc) then
       AProc(AUser, LUser);
     end;
-      Result := LUser <> nil
+      Result := LUser <> nil;
 end;
 
 function TApp42Api.QueryUserName(const AUserName: string; AProc: TQueryUserNameProc): Boolean;
@@ -1693,12 +1707,13 @@ var
   LLogin: TLogin;
   LSignature, LBody : string;
 begin
-try
   FRequest.ResetToDefaults;
   AddAuthParameters;
   FRequest.Method := TRESTRequestMethod.rmPOST;
   FRequest.Resource := sUsers+'/authenticateAndCreateSession'; // do not localize
   LUser := TJSONObject.Create;
+  LApp42Utils := TApp42Utils.Create;
+try
   LUser.AddPair('userName', AUserName); // Do not localize
   LUser.AddPair('password', APassword); // Do not localize
   LBody := '{"app42":{"user":'+LUser.ToString+'}}';
@@ -1750,11 +1765,12 @@ var
   LApp42Utils: TApp42Utils;
   LSignature, LBody : string;
 begin
-  try
   FRequest.ResetToDefaults;
   AddAuthParameters;
   FRequest.Method := TRESTRequestMethod.rmPOST;
   FRequest.Resource := sUsers;
+  LUser := TJSONObject.Create;
+  LDBCredentials:= TJSONObject.Create;
   if AUserFields <> nil then
   begin
     LUserFields := AUserFields.Clone as TJSONObject;
@@ -1765,13 +1781,12 @@ begin
     LUserFields := TJSONObject.Create;
     LUserFields.AddPair('userName', AUserName);
   end;
-    LDBCredentials:= TJSONObject.Create;
+try
     LDBCredentials.AddPair('dbName', sDBName);  // Do not localize
     LDBCredentials.AddPair('collectionName', sUserCollectionName); // Do not localize
     // Adding UserDetails to headers With DBName And Collection Name.
     Request.Params.AddHeader('jsonObject', LUserFields.ToString);
     Request.Params.AddHeader('dbCredentials',LDBCredentials.ToString);
-    LUser := TJSONObject.Create;
     LUser.AddPair('userName', AUserName); // Do not localize
     LUser.AddPair('password', APassword); // Do not localize
     LUser.AddPair('email', AUserName); // Do not localize
@@ -1779,6 +1794,7 @@ begin
     LBody := '{"app42":{"user":'+LUser.ToString+'}}';  // Do not localize
     FRequest.AddBody(LBody, ctAPPLICATION_JSON);
     SignParamsDics.Add('body',LBody);
+    LApp42Utils := TApp42Utils.Create;
     LSignature := LApp42Utils.Sign(SignParamsDics,FConnectionInfo.SecretKey);
     Request.Params.AddHeader('signature',LSignature);
     FRequest.Execute;
@@ -1813,6 +1829,7 @@ try
    SignParamsDics.Add('collectionName',sUserCollectionName);
    SignParamsDics.Add('dbName',sDBName);
    SignParamsDics.Add('docId',AObjectID);
+   LApp42Utils := TApp42Utils.Create;
    LSignature := LApp42Utils.Sign(SignParamsDics,FConnectionInfo.SecretKey);
    Request.Params.AddHeader('signature',LSignature);
   // FRequest.Method := TRESTRequestMethod.rmPUT;
@@ -1842,7 +1859,8 @@ procedure TApp42Api.QueryUsers(const AQuery: array of string; const AJSONArray: 
 var
 LResource : string;
 begin
-  QueryResource(sStorage + '/findDocsByQuery/dbName/' + sDBName + '/collectionName/' + sUserCollectionName, sUserCollectionName, AQuery, AJSONArray, True);
+  LResource := sStorage + '/findDocsByQuery/dbName/' + sDBName + '/collectionName/' + sUserCollectionName;
+  QueryResource(LResource, sUserCollectionName, AQuery, AJSONArray, True);
 end;
 
 procedure TApp42Api.QueryUsers(const AQuery: array of string; const AJSONArray: TJSONArray; out AUsers: TArray<TUser>);
@@ -2006,6 +2024,7 @@ begin
       LJSONObject.AddPair( 'userName', AUserId );            // Do not localize
   LBody := '{"app42":{"push":'+LJSONObject.ToString+'}}';   // Do not localize
   SignParamsDics.Add('body',LBody);
+  LApp42Utils := TApp42Utils.Create;
   LSignature := LApp42Utils.Sign(SignParamsDics,FConnectionInfo.SecretKey);
   Request.Params.AddHeader('signature',LSignature);
   FRequest.AddBody(LBody, ctAPPLICATION_JSON);
@@ -2037,7 +2056,6 @@ end;
 procedure TApp42Api.PushUnregisterDevice(APlatformType: TPlatformType; const ADeviceID,
   AUserID: string);
 var
-  LJSONObject : TJSONObject;
   LSignature : string;
   LApp42Utils: TApp42Utils;
 begin
@@ -2045,11 +2063,11 @@ begin
   AddAuthParameters;
   FRequest.Method := TRESTRequestMethod.rmDELETE;
   FRequest.Resource := sPush;
-
   SignParamsDics.Add('userName',AUserID);
   SignParamsDics.Add('deviceToken',ADeviceID);
   FRequest.AddParameter('userName',AUserID);
   FRequest.AddParameter('deviceToken',ADeviceID);
+  LApp42Utils := TApp42Utils.Create;
   LSignature := LApp42Utils.Sign(SignParamsDics,FConnectionInfo.SecretKey);
   FRequest.Params.AddHeader('signature',LSignature);
   FRequest.Execute;
@@ -2111,24 +2129,26 @@ LApp42Utils : TApp42Utils;
 LSignature, LBody : string;
 LSessionObject, LJObject, LId : TJSONObject;
 begin
-  try
   Result := false;
   FRequest.ResetToDefaults;
   AddAuthParameters;
    LSessionObject:= TJSONObject.Create;
+   LJObject:= TJSONObject.Create;
+   LApp42Utils := TApp42Utils.Create;
+try
    LId := TJsonObject.Create.AddPair('$oid', AUser.ObjectID);
    LSessionObject.AddPair('userName',AUserName);
    LSignature := DateToISO8601(AUser.FCreatedAt);
    LSessionObject.AddPair('_$createdAt', DateToISO8601(AUser.FCreatedAt));
    LSessionObject.AddPair('_$updatedAt', DateToISO8601(AUser.FUpdatedAt));
    LSessionObject.AddPair('_id', LId);
-  LJObject:= TJSONObject.Create;
   LJObject.AddPair('name', 'sessionEntities'); // Do not localize
   LJObject.AddPair('value', LSessionObject.ToString); // Do not localize
   // Creating JSON Body for Session Post Request.
   LBody := '{"app42":{"session":'+LJObject.ToString+'}}';  // Do not localize
   SignParamsDics.Add('sessionId',ASessionId);
   SignParamsDics.Add('body',LBody);
+
   LSignature := LApp42Utils.Sign(SignParamsDics,FConnectionInfo.SecretKey);
   Request.Params.AddHeader('signature',LSignature);
   FRequest.AddBody(LBody, ctAPPLICATION_JSON);
@@ -2151,12 +2171,12 @@ var
   LSignature, LQueryString: string;
   LIsSuccess : Boolean;
   LApp42Utils: TApp42Utils;
-  LQuery, LResponse, LUser, LApp42, LSuccess, LStorage, LJsonDoc, LUserObjectId: TJSONObject;
+  LQuery, LResponse, LUser: TJSONObject;
   LQueryArray : TJSONArray;
   LDBCredentials : TJSONObject;
 begin
-try
   CheckUserName(AUserName);
+  LApp42Utils := TApp42Utils.Create;
   FRequest.ResetToDefaults;
   AddAuthParameters;
   FRequest.Method := TRESTRequestMethod.rmGET;
@@ -2164,9 +2184,10 @@ try
   LQueryString := 'userName=='+AUserName;
   LQuery := LApp42Utils.BuildQueryString(LQueryString);
   LQueryArray:= TJSONArray.Create;
+  LDBCredentials:= TJSONObject.Create;
+try
   LQueryArray.AddElement(LQuery);
   Request.Params.AddHeader('metaQuery',LQueryArray.ToString);
-  LDBCredentials:= TJSONObject.Create;
   LDBCredentials.AddPair('dbName', sDBName);  // Do not localize
   LDBCredentials.AddPair('collectionName', sUserCollectionName); // Do not localize
     // Adding UserDetails to headers With DBName And Collection Name.
@@ -2176,6 +2197,10 @@ try
   Request.Params.AddHeader('signature',LSignature);
   FRequest.Execute;
   CheckForResponseError([404]); // 404 = not found
+  finally
+  LDBCredentials.Free;
+  // LQueryArray.Fr  ee;
+  end;
   LIsSuccess := FRequest.Response.StatusCode <> 404;
   if LIsSuccess then
   begin
@@ -2194,10 +2219,7 @@ try
   end
   else
   Result := nil;
-finally
- LDBCredentials.Free;
- LQueryArray.Free;
-end;
+
 end;
 
 // Signing.
@@ -2214,14 +2236,13 @@ end;
 // Creating Signature.
 function TApp42Utils.CreateSignature(const AData, AKey: string) : string;
 var
-  Key: TIdBytes;
   ResBytes: TIdBytes;
 begin
   with TIdHMACSHA1.Create do
   try
     Key := ToBytes(AKey);
     ResBytes := HashValue(ToBytes(AData));
-    Result := EncodeBase64(ResBytes,Length(ResBytes));
+    Result := string(EncodeBase64(ResBytes,Length(ResBytes)));
   finally
     Free;
   end;
@@ -2301,6 +2322,7 @@ var
   I: Integer;
   LExpression: TJSONObject;
 begin
+ LExpression := TJSONObject.Create;
   S:= q1;
  if S.Contains('==') then
   begin
@@ -2409,7 +2431,6 @@ begin
     LExpression := TJSONObject.Create;
          LExpression.AddPair('compoundOpt','$or');
    end;
-
 Result := LExpression;
 end;
 
@@ -2427,4 +2448,6 @@ end;
 
 end.
 
+
+
 

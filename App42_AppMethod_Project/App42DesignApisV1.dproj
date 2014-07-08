@@ -6,7 +6,7 @@
         <FrameworkType>None</FrameworkType>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Release</Config>
-        <Platform Condition="'$(Platform)'==''">OSX32</Platform>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>95</TargetedPlatforms>
         <AppType>Package</AppType>
     </PropertyGroup>
@@ -155,6 +155,7 @@
         </DelphiCompile>
         <DCCReference Include="App42APIs.dcp"/>
         <DCCReference Include="rtl.dcp"/>
+        <DCCReference Include="DesignIDE.dcp"/>
         <DCCReference Include="src\REST.Backend.App42Api.pas"/>
         <DCCReference Include="src\REST.Backend.App42MetaTypes.pas"/>
         <DCCReference Include="src\REST.Backend.App42Provider.pas"/>

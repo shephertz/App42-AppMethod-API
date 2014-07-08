@@ -25,6 +25,8 @@ package App42APIs;
 {$IMAGEBASE $400000}
 {$DEFINE DEBUG}
 {$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'App42 Baas Apis'}
+{$LIBSUFFIX '200'}
 {$RUNONLY}
 {$IMPLICITBUILD OFF}
 
@@ -37,6 +39,8 @@ requires
   bindcomp,
   IndySystem,
   IndyProtocols,
-  IndyCore;
+  IndyCore,
+  inet,
+  soaprtl;
 
 end.
