@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{7D6CB0A9-60BE-41A4-89EF-2D23DF5990C3}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="App42RESTApis.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dclApp42RESTApis.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="App42RESTApis">
+        <MSBuild Projects="App42RESTApis.dproj"/>
+    </Target>
+    <Target Name="App42RESTApis:Clean">
+        <MSBuild Projects="App42RESTApis.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="App42RESTApis:Make">
+        <MSBuild Projects="App42RESTApis.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dclApp42RESTApis">
+        <MSBuild Projects="dclApp42RESTApis.dproj"/>
+    </Target>
+    <Target Name="dclApp42RESTApis:Clean">
+        <MSBuild Projects="dclApp42RESTApis.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dclApp42RESTApis:Make">
+        <MSBuild Projects="dclApp42RESTApis.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="App42RESTApis;dclApp42RESTApis"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="App42RESTApis:Clean;dclApp42RESTApis:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="App42RESTApis:Make;dclApp42RESTApis:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
