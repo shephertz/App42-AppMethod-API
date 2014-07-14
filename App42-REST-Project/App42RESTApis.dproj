@@ -6,7 +6,7 @@
         <FrameworkType>None</FrameworkType>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Release</Config>
-        <Platform Condition="'$(Platform)'==''">OSX32</Platform>
+        <Platform Condition="'$(Platform)'==''">Android</Platform>
         <TargetedPlatforms>95</TargetedPlatforms>
         <AppType>Package</AppType>
     </PropertyGroup>
@@ -184,26 +184,22 @@
         <DCC_RemoteDebug>true</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Android)'!=''">
-        <DCC_UnitSearchPath>C:\Users\App42Admin\Desktop\BUILDER\dcps\Android;C:\Users\App42Admin\Desktop\BUILDER\dcus\Android\Debug;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_Build>1</VerInfo_Build>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_iOSDevice)'!=''">
         <VerInfo_UIDeviceFamily>iPhoneAndiPad</VerInfo_UIDeviceFamily>
-        <DCC_UnitSearchPath>C:\Users\App42Admin\Desktop\BUILDER\dcps\iOSDevice;C:\Users\App42Admin\Desktop\BUILDER\dcus\iOSDevice\Debug;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_BundleId>$(MSBuildProjectName)</VerInfo_BundleId>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_iOSSimulator)'!=''">
         <VerInfo_UIDeviceFamily>iPhoneAndiPad</VerInfo_UIDeviceFamily>
-        <DCC_UnitSearchPath>C:\Users\App42Admin\Desktop\BUILDER\dcps\iOSSimulator;C:\Users\App42Admin\Desktop\BUILDER\dcus\iOSSimulator\Debug;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_OSX32)'!=''">
-        <DCC_UnitSearchPath>C:\Users\App42Admin\Desktop\BUILDER\dcps\OSX32;C:\Users\App42Admin\Desktop\BUILDER\dcus\OSX32\Debug;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <Debugger_Launcher>/usr/X11/bin/xterm -e &quot;%debuggee%&quot;</Debugger_Launcher>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <DCC_UnitSearchPath>C:\Users\App42Admin\Desktop\BUILDER\dcps\Win32;C:\Users\App42Admin\Desktop\BUILDER\dcus\Win32\Debug;C:\Users\Public\Documents\Embarcadero\Studio\14.0\Bpl;C:\Users\Public\Documents\Embarcadero\Studio\14.0\DCP;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>C:\Users\Public\Documents\Embarcadero\Studio\14.0\Bpl;C:\Users\Public\Documents\Embarcadero\Studio\14.0\DCP;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <DllSuffix>200</DllSuffix>
         <DCC_Description>App42 REST Apis</DCC_Description>
@@ -211,7 +207,6 @@
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
-        <DCC_UnitSearchPath>C:\Users\App42Admin\Desktop\BUILDER\dcps\Win64;C:\Users\App42Admin\Desktop\BUILDER\dcus\Win64\Debug;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
     </PropertyGroup>
@@ -222,32 +217,27 @@
         <DCC_DebugInformation>0</DCC_DebugInformation>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Android)'!=''">
-        <DCC_UnitSearchPath>C:\Users\App42Admin\Desktop\BUILDER\dcps\Android;C:\Users\App42Admin\Desktop\BUILDER\dcus\Android\Release;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_Build>1</VerInfo_Build>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_iOSDevice)'!=''">
         <VerInfo_UIDeviceFamily>iPhoneAndiPad</VerInfo_UIDeviceFamily>
-        <DCC_UnitSearchPath>C:\Users\App42Admin\Desktop\BUILDER\dcps\iOSDevice;C:\Users\App42Admin\Desktop\BUILDER\dcus\iOSDevice\Release;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_BundleId>$(MSBuildProjectName)</VerInfo_BundleId>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_iOSSimulator)'!=''">
         <VerInfo_UIDeviceFamily>iPhoneAndiPad</VerInfo_UIDeviceFamily>
-        <DCC_UnitSearchPath>C:\Users\App42Admin\Desktop\BUILDER\dcps\iOSSimulator;C:\Users\App42Admin\Desktop\BUILDER\dcus\iOSSimulator\Release;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_OSX32)'!=''">
-        <DCC_UnitSearchPath>C:\Users\App42Admin\Desktop\BUILDER\dcps\OSX32;C:\Users\App42Admin\Desktop\BUILDER\dcus\OSX32\Release;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <Debugger_Launcher>/usr/X11/bin/xterm -e &quot;%debuggee%&quot;</Debugger_Launcher>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <DllSuffix>200</DllSuffix>
-        <DCC_UnitSearchPath>C:\Users\Public\Documents\Embarcadero\Studio\14.0\DCP;C:\Users\App42Admin\Desktop\BUILDER\dcps\Win32;C:\Users\App42Admin\Desktop\BUILDER\dcus\Win32\Release;C:\Users\Public\Documents\Embarcadero\Studio\14.0\Bpl;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>C:\Users\Public\Documents\Embarcadero\Studio\14.0\DCP;C:\Users\Public\Documents\Embarcadero\Studio\14.0\Bpl;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
-        <DCC_UnitSearchPath>C:\Users\App42Admin\Desktop\BUILDER\dcps\Win64;C:\Users\App42Admin\Desktop\BUILDER\dcus\Win64\Release;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
     </PropertyGroup>
