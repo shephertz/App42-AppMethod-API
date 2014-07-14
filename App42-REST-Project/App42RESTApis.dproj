@@ -6,7 +6,7 @@
         <FrameworkType>None</FrameworkType>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Release</Config>
-        <Platform Condition="'$(Platform)'==''">iOSSimulator</Platform>
+        <Platform Condition="'$(Platform)'==''">OSX32</Platform>
         <TargetedPlatforms>95</TargetedPlatforms>
         <AppType>Package</AppType>
     </PropertyGroup>
@@ -184,39 +184,26 @@
         <DCC_RemoteDebug>true</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Android)'!=''">
-        <DCC_HppOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\Android\Hpp\Debug\</DCC_HppOutput>
         <DCC_UnitSearchPath>C:\Users\App42Admin\Desktop\BUILDER\dcps\Android;C:\Users\App42Admin\Desktop\BUILDER\dcus\Android\Debug;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
-        <DCC_ObjOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\Android\ObjLib\Debug\</DCC_ObjOutput>
         <VerInfo_Build>1</VerInfo_Build>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_iOSDevice)'!=''">
-        <DCC_HppOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\iOS\Hpp\Debug\</DCC_HppOutput>
         <VerInfo_UIDeviceFamily>iPhoneAndiPad</VerInfo_UIDeviceFamily>
         <DCC_UnitSearchPath>C:\Users\App42Admin\Desktop\BUILDER\dcps\iOSDevice;C:\Users\App42Admin\Desktop\BUILDER\dcus\iOSDevice\Debug;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_BundleId>$(MSBuildProjectName)</VerInfo_BundleId>
-        <DCC_ObjOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\iOS\ObjLib\Debug\</DCC_ObjOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_iOSSimulator)'!=''">
-        <DCC_BpiOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\iOSSimulator\Bpi\Debug\</DCC_BpiOutput>
         <VerInfo_UIDeviceFamily>iPhoneAndiPad</VerInfo_UIDeviceFamily>
         <DCC_UnitSearchPath>C:\Users\App42Admin\Desktop\BUILDER\dcps\iOSSimulator;C:\Users\App42Admin\Desktop\BUILDER\dcus\iOSSimulator\Debug;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <DCC_ObjOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\iOSSimulator\ObjLib\Debug\</DCC_ObjOutput>
-        <DCC_HppOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\iOSSimulator\Hpp\Debug\</DCC_HppOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_OSX32)'!=''">
-        <DCC_BpiOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\OSX32\Bpi\Debug\</DCC_BpiOutput>
         <DCC_UnitSearchPath>C:\Users\App42Admin\Desktop\BUILDER\dcps\OSX32;C:\Users\App42Admin\Desktop\BUILDER\dcus\OSX32\Debug;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
-        <DCC_HppOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\OSX32\Hpp\Debug\</DCC_HppOutput>
         <Debugger_Launcher>/usr/X11/bin/xterm -e &quot;%debuggee%&quot;</Debugger_Launcher>
-        <DCC_ObjOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\OSX32\ObjLib\Debug\</DCC_ObjOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <DCC_HppOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\Win32\Hpp\Debug\</DCC_HppOutput>
-        <DCC_ObjOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\Win32\ObjLib\Debug\</DCC_ObjOutput>
         <DCC_UnitSearchPath>C:\Users\App42Admin\Desktop\BUILDER\dcps\Win32;C:\Users\App42Admin\Desktop\BUILDER\dcus\Win32\Debug;C:\Users\Public\Documents\Embarcadero\Studio\14.0\Bpl;C:\Users\Public\Documents\Embarcadero\Studio\14.0\DCP;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
-        <DCC_BpiOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\Win32\Bpi\Debug\</DCC_BpiOutput>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <DllSuffix>200</DllSuffix>
         <DCC_Description>App42 REST Apis</DCC_Description>
@@ -224,12 +211,9 @@
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
-        <DCC_BpiOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\Win64\Bpi\Debug\</DCC_BpiOutput>
         <DCC_UnitSearchPath>C:\Users\App42Admin\Desktop\BUILDER\dcps\Win64;C:\Users\App42Admin\Desktop\BUILDER\dcus\Win64\Debug;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <DCC_ObjOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\Win64\ObjLib\Debug\</DCC_ObjOutput>
-        <DCC_HppOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\Win64\Hpp\Debug\</DCC_HppOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -238,50 +222,34 @@
         <DCC_DebugInformation>0</DCC_DebugInformation>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Android)'!=''">
-        <DCC_HppOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\Android\Hpp\Release\</DCC_HppOutput>
         <DCC_UnitSearchPath>C:\Users\App42Admin\Desktop\BUILDER\dcps\Android;C:\Users\App42Admin\Desktop\BUILDER\dcus\Android\Release;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_Build>1</VerInfo_Build>
-        <DCC_ObjOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\Android\ObjLib\Release\</DCC_ObjOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_iOSDevice)'!=''">
-        <DCC_HppOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\iOS\Hpp\Release\</DCC_HppOutput>
         <VerInfo_UIDeviceFamily>iPhoneAndiPad</VerInfo_UIDeviceFamily>
         <DCC_UnitSearchPath>C:\Users\App42Admin\Desktop\BUILDER\dcps\iOSDevice;C:\Users\App42Admin\Desktop\BUILDER\dcus\iOSDevice\Release;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_BundleId>$(MSBuildProjectName)</VerInfo_BundleId>
-        <DCC_ObjOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\iOS\ObjLib\Release\</DCC_ObjOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_iOSSimulator)'!=''">
-        <DCC_BpiOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\iOSSimulator\Bpi\Release\</DCC_BpiOutput>
         <VerInfo_UIDeviceFamily>iPhoneAndiPad</VerInfo_UIDeviceFamily>
         <DCC_UnitSearchPath>C:\Users\App42Admin\Desktop\BUILDER\dcps\iOSSimulator;C:\Users\App42Admin\Desktop\BUILDER\dcus\iOSSimulator\Release;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <DCC_ObjOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\iOSSimulator\ObjLib\Release\</DCC_ObjOutput>
-        <DCC_HppOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\iOSSimulator\Hpp\Release\</DCC_HppOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_OSX32)'!=''">
-        <DCC_BpiOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\OSX32\Bpi\Release\</DCC_BpiOutput>
         <DCC_UnitSearchPath>C:\Users\App42Admin\Desktop\BUILDER\dcps\OSX32;C:\Users\App42Admin\Desktop\BUILDER\dcus\OSX32\Release;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
-        <DCC_HppOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\OSX32\Hpp\Release\</DCC_HppOutput>
         <Debugger_Launcher>/usr/X11/bin/xterm -e &quot;%debuggee%&quot;</Debugger_Launcher>
-        <DCC_ObjOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\OSX32\ObjLib\Release\</DCC_ObjOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <DllSuffix>200</DllSuffix>
-        <DCC_BpiOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\Win32\Bpi\Release\</DCC_BpiOutput>
         <DCC_UnitSearchPath>C:\Users\Public\Documents\Embarcadero\Studio\14.0\DCP;C:\Users\App42Admin\Desktop\BUILDER\dcps\Win32;C:\Users\App42Admin\Desktop\BUILDER\dcus\Win32\Release;C:\Users\Public\Documents\Embarcadero\Studio\14.0\Bpl;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <DCC_ObjOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\Win32\ObjLib\Release\</DCC_ObjOutput>
-        <DCC_HppOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\Win32\Hpp\Release\</DCC_HppOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
-        <DCC_BpiOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\Win64\Bpi\Release\</DCC_BpiOutput>
         <DCC_UnitSearchPath>C:\Users\App42Admin\Desktop\BUILDER\dcps\Win64;C:\Users\App42Admin\Desktop\BUILDER\dcus\Win64\Release;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <DCC_ObjOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\Win64\ObjLib\Release\</DCC_ObjOutput>
-        <DCC_HppOutput>C:\Users\App42Admin\Desktop\BUILDER\C++\Win64\Hpp\Release\</DCC_HppOutput>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
