@@ -1,10 +1,4 @@
-{*******************************************************}
-{                                                       }
-{             Delphi REST Client Framework              }
-{                                                       }
-{ Copyright(c) 2014 Embarcadero Technologies, Inc.      }
-{                                                       }
-{*******************************************************}
+
 unit REST.Backend.App42Api;
 
 interface

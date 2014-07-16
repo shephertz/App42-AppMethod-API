@@ -252,6 +252,13 @@
         <DCCReference Include="rtl.dcp"/>
         <DCCReference Include="App42RESTApis.dcp"/>
         <DCCReference Include="src\REST.Backend.ComponentRegistration.App42.pas"/>
+        <RcItem Include="src\App42Provider.bmp">
+            <ResourceType>BITMAP</ResourceType>
+            <ResourceId>TAPP42PROVIDER</ResourceId>
+        </RcItem>
+        <RcCompile Include="src\App42Provider.rc">
+            <Form>App42Provider.res</Form>
+        </RcCompile>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -282,7 +289,7 @@
             <Deployment/>
             <Platforms>
                 <Platform value="Android">True</Platform>
-                <Platform value="iOSDevice" ActiveMobileDevice="%iosdevice%34ee7f9728a1aa6e28fea7daf8526b0cbd9e71cc">True</Platform>
+                <Platform value="iOSDevice">True</Platform>
                 <Platform value="iOSSimulator" ActiveMobileDevice="iPhone">True</Platform>
                 <Platform value="OSX32">True</Platform>
                 <Platform value="Win32">True</Platform>
