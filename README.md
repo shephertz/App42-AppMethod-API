@@ -28,7 +28,9 @@ Here are the following steps to get started with App42 platform
 
 * Drag and Drop the TApp42Provider component in design view of App. Click on App42Provider1, now you can see the     Properties and events  in Object Inspector.
 
-* Make sure to copy *.dcu/dcp file available in the dist folder of downloaded zip to your Delphi Library Path [See here for details](http://docwiki.embarcadero.com/RADStudio/XE6/en/Installing_Component_Packages).
+* __Delphi-__ Make sure to give the _App42-AppMethod-API/dist/dcu/_ path to the project's search path of desired platform, [See here for details](http://docwiki.embarcadero.com/RADStudio/XE6/en/Installing_Component_Packages).
+
+* __C++ -__ For C++ give the _App42-AppMethod-API/dist/C++/hpp_ and _App42-AppMethod-API/dist/C++/ObjLib_ path to the project's include path of desired platform.
 
 * Set the property ApiKey/SecretKey/AdminKey that you have received while creating the App(in AppHQ console) in Object Inspector.
 
