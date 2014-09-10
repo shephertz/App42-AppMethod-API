@@ -25,7 +25,6 @@ package App42RESTApis;
 {$IMAGEBASE $400000}
 {$DEFINE RELEASE}
 {$ENDIF IMPLICITBUILDING}
-{$LIBSUFFIX '200'}
 {$RUNONLY}
 {$IMPLICITBUILD OFF}
 
@@ -35,7 +34,8 @@ requires
   RestBackendComponents,
   IndySystem,
   IndyProtocols,
-  IndyCore;
+  IndyCore,
+  soaprtl;
 
 contains
   REST.Backend.App42Api in 'src\REST.Backend.App42Api.pas',

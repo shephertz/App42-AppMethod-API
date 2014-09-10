@@ -2,7 +2,7 @@
 // Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'REST.Backend.App42Api.pas' rev: 27.00 (MacOS)
+// (DO NOT EDIT: machine generated header) 'REST.Backend.App42Api.pas' rev: 28.00 (MacOS)
 
 #ifndef Rest_Backend_App42apiHPP
 #define Rest_Backend_App42apiHPP
@@ -185,7 +185,7 @@ public:
 	
 	enum class DECLSPEC_DENUM TAuthentication : unsigned char { Default, AdminKey, APIKey, Session, None };
 	
-	typedef System::Set<TAuthentication, TAuthentication::Default, TAuthentication::None> TAuthentications;
+	typedef System::Set<TAuthentication, _DELPHI_SET_ENUMERATOR(TAuthentication::Default), _DELPHI_SET_ENUMERATOR(TAuthentication::None)> TAuthentications;
 	
 	enum class DECLSPEC_DENUM TDefaultAuthentication : unsigned char { APIKey, AdminKey, Session, None };
 	

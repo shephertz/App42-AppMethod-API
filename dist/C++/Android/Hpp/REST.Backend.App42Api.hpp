@@ -2,7 +2,7 @@
 // Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'REST.Backend.App42Api.pas' rev: 27.00 (Android)
+// (DO NOT EDIT: machine generated header) 'REST.Backend.App42Api.pas' rev: 28.00 (Android)
 
 #ifndef Rest_Backend_App42apiHPP
 #define Rest_Backend_App42apiHPP
@@ -196,7 +196,7 @@ public:
 	
 	enum class DECLSPEC_DENUM TAuthentication : unsigned char { Default, AdminKey, APIKey, Session, None };
 	
-	typedef System::Set<TAuthentication, TAuthentication::Default, TAuthentication::None> TAuthentications;
+	typedef System::Set<TAuthentication, _DELPHI_SET_ENUMERATOR(TAuthentication::Default), _DELPHI_SET_ENUMERATOR(TAuthentication::None)> TAuthentications;
 	
 	enum class DECLSPEC_DENUM TDefaultAuthentication : unsigned char { APIKey, AdminKey, Session, None };
 	
@@ -321,14 +321,14 @@ public:
 	void __fastcall UpdateClass(const System::UnicodeString ABackendClassName, const System::UnicodeString AObjectID, System::Json::TJSONObject* const AJSONObject, /* out */ TUpdatedAt &AUpdatedAt)/* overload */;
 	void __fastcall UpdateClass(const TObjectID &AID, System::Json::TJSONObject* const AJSONObject, /* out */ TUpdatedAt &AUpdatedAt)/* overload */;
 	void __fastcall QueryClass(const System::UnicodeString ABackendClassName, System::UnicodeString const *AQuery, const int AQuery_High, System::Json::TJSONArray* const AJSONArray)/* overload */;
-	void __fastcall QueryClass(const System::UnicodeString ABackendClassName, System::UnicodeString const *AQuery, const int AQuery_High, System::Json::TJSONArray* const AJSONArray, /* out */ System::DynamicArray<TObjectID> &AObjects)/* overload */;
+	void __fastcall QueryClass(const System::UnicodeString ABackendClassName, System::UnicodeString const *AQuery, const int AQuery_High, System::Json::TJSONArray* const AJSONArray, /* out */ System::TArray__1<TObjectID> &AObjects)/* overload */;
 	System::Json::TJSONObject* __fastcall CreateAndroidInstallationObject(const System::UnicodeString AInstallationID, System::UnicodeString *AChannels, const int AChannels_High);
 	System::Json::TJSONObject* __fastcall CreateIOSInstallationObject(const System::UnicodeString ADeviceToken, int ABadge, System::UnicodeString *AChannels, const int AChannels_High);
 	void __fastcall UploadInstallation(System::Json::TJSONObject* const AJSON, /* out */ TObjectID &ANewObject);
 	void __fastcall UpdateInstallation(const System::UnicodeString AObjectID, System::Json::TJSONObject* const AJSONObject, /* out */ TUpdatedAt &AUpdatedAt);
 	bool __fastcall DeleteInstallation(const System::UnicodeString AObjectID)/* overload */;
 	void __fastcall QueryInstallation(System::UnicodeString const *AQuery, const int AQuery_High, System::Json::TJSONArray* const AJSONArray)/* overload */;
-	void __fastcall QueryInstallation(System::UnicodeString const *AQuery, const int AQuery_High, System::Json::TJSONArray* const AJSONArray, /* out */ System::DynamicArray<TObjectID> &AObjects)/* overload */;
+	void __fastcall QueryInstallation(System::UnicodeString const *AQuery, const int AQuery_High, System::Json::TJSONArray* const AJSONArray, /* out */ System::TArray__1<TObjectID> &AObjects)/* overload */;
 	void __fastcall PushRegisterDevice(TPlatformType APlatformType, const System::UnicodeString ADeviceID, const System::UnicodeString AUserID)/* overload */;
 	void __fastcall PushRegisterDevice(TPlatformType APlatformType, const System::UnicodeString ADeviceID)/* overload */;
 	void __fastcall PushRegisterDevice(TPlatformType APlatformType, const System::UnicodeString ADeviceID, const TUser &AUser)/* overload */;
@@ -363,7 +363,7 @@ public:
 	bool __fastcall DeleteUser(const System::UnicodeString AObjectID)/* overload */;
 	bool __fastcall DeleteUser(const TLogin &ALogin)/* overload */;
 	void __fastcall QueryUsers(System::UnicodeString const *AQuery, const int AQuery_High, System::Json::TJSONArray* const AJSONArray)/* overload */;
-	void __fastcall QueryUsers(System::UnicodeString const *AQuery, const int AQuery_High, System::Json::TJSONArray* const AJSONArray, /* out */ System::DynamicArray<TUser> &AUsers)/* overload */;
+	void __fastcall QueryUsers(System::UnicodeString const *AQuery, const int AQuery_High, System::Json::TJSONArray* const AJSONArray, /* out */ System::TArray__1<TUser> &AUsers)/* overload */;
 	void __fastcall Login(const System::UnicodeString ASessionToken)/* overload */;
 	void __fastcall Login(const TLogin &ALogin)/* overload */;
 	void __fastcall Logout(void);

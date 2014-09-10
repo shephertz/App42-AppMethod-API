@@ -2,7 +2,7 @@
 // Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'dclApp42RESTApis.dpk' rev: 27.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'dclApp42RESTApis.dpk' rev: 28.00 (Windows)
 
 #ifndef Dclapp42restapisHPP
 #define Dclapp42restapisHPP
@@ -33,21 +33,21 @@
 #include <System.StrUtils.hpp>	// Pascal unit
 #include <System.AnsiStrings.hpp>	// Pascal unit
 #include <System.Math.hpp>	// Pascal unit
-#include <System.TimeSpan.hpp>	// Pascal unit
-#include <System.Diagnostics.hpp>	// Pascal unit
-#include <System.SyncObjs.hpp>	// Pascal unit
 #include <System.Generics.Defaults.hpp>	// Pascal unit
 #include <System.Generics.Collections.hpp>	// Pascal unit
 #include <System.Rtti.hpp>	// Pascal unit
 #include <System.TypInfo.hpp>	// Pascal unit
 #include <System.Classes.hpp>	// Pascal unit
-#include <REST.Utils.hpp>	// Pascal unit
-#include <REST.Backend.Consts.hpp>	// Pascal unit
-#include <REST.Backend.Exception.hpp>	// Pascal unit
-#include <REST.Backend.Providers.hpp>	// Pascal unit
+#include <System.TimeSpan.hpp>	// Pascal unit
+#include <System.Diagnostics.hpp>	// Pascal unit
+#include <System.SyncObjs.hpp>	// Pascal unit
 #include <System.DateUtils.hpp>	// Pascal unit
 #include <System.JSONConsts.hpp>	// Pascal unit
 #include <System.JSON.hpp>	// Pascal unit
+#include <REST.Backend.Consts.hpp>	// Pascal unit
+#include <REST.Backend.Exception.hpp>	// Pascal unit
+#include <REST.Backend.MetaTypes.hpp>	// Pascal unit
+#include <REST.Utils.hpp>	// Pascal unit
 #include <System.Bindings.Consts.hpp>	// Pascal unit
 #include <System.Bindings.EvalProtocol.hpp>	// Pascal unit
 #include <System.Bindings.Search.hpp>	// Pascal unit
@@ -80,60 +80,15 @@
 #include <REST.Types.hpp>	// Pascal unit
 #include <REST.Exception.hpp>	// Pascal unit
 #include <REST.BindSource.hpp>	// Pascal unit
-#include <Data.DBConsts.hpp>	// Pascal unit
-#include <Data.FmtBcd.hpp>	// Pascal unit
-#include <Xml.XMLConst.hpp>	// Pascal unit
-#include <Winapi.MSXMLIntf.hpp>	// Pascal unit
-#include <System.Win.ComConst.hpp>	// Pascal unit
-#include <System.Win.ComObj.hpp>	// Pascal unit
-#include <Winapi.msxml.hpp>	// Pascal unit
-#include <Xml.Win.msxmldom.hpp>	// Pascal unit
-#include <Xml.xmldom.hpp>	// Pascal unit
-#include <Xml.XMLIntf.hpp>	// Pascal unit
-#include <Xml.XMLDoc.hpp>	// Pascal unit
-#include <Xml.XMLSchemaTags.hpp>	// Pascal unit
-#include <Xml.XMLSchema.hpp>	// Pascal unit
-#include <Soap.SOAPConst.hpp>	// Pascal unit
-#include <Soap.IntfInfo.hpp>	// Pascal unit
-#include <Soap.OpConvertOptions.hpp>	// Pascal unit
-#include <Winapi.WinSock.hpp>	// Pascal unit
-#include <Winapi.WinInet.hpp>	// Pascal unit
-#include <Soap.SOAPAttachIntf.hpp>	// Pascal unit
-#include <Soap.WebNode.hpp>	// Pascal unit
-#include <Soap.WSDLIntf.hpp>	// Pascal unit
-#include <Soap.WSDLBind.hpp>	// Pascal unit
-#include <Soap.WSDLLookup.hpp>	// Pascal unit
-#include <Soap.WSDLItems.hpp>	// Pascal unit
-#include <Soap.WSDLNode.hpp>	// Pascal unit
-#include <Soap.Win.CertHelper.hpp>	// Pascal unit
-#include <System.Masks.hpp>	// Pascal unit
-#include <Web.WebConst.hpp>	// Pascal unit
-#include <Web.WebFileDispatcher.hpp>	// Pascal unit
-#include <Web.BrkrConst.hpp>	// Pascal unit
-#include <Web.HTTPApp.hpp>	// Pascal unit
-#include <System.IOUtils.hpp>	// Pascal unit
-#include <Soap.SOAPAttach.hpp>	// Pascal unit
-#include <Soap.inquire_v1.hpp>	// Pascal unit
-#include <Soap.OPConvert.hpp>	// Pascal unit
-#include <Soap.SOAPDomConv.hpp>	// Pascal unit
-#include <Soap.SOAPEnv.hpp>	// Pascal unit
-#include <Soap.EncdDecd.hpp>	// Pascal unit
-#include <Soap.TypeTrans.hpp>	// Pascal unit
-#include <Soap.OPToSOAPDomConv.hpp>	// Pascal unit
-#include <Soap.WebServExp.hpp>	// Pascal unit
-#include <Soap.Rio.hpp>	// Pascal unit
-#include <Soap.SOAPHTTPClient.hpp>	// Pascal unit
-#include <Soap.UDDIHelper.hpp>	// Pascal unit
-#include <Soap.SOAPHTTPTrans.hpp>	// Pascal unit
-#include <Soap.HTTPUtil.hpp>	// Pascal unit
-#include <Soap.InvokeRegistry.hpp>	// Pascal unit
-#include <Soap.XSBuiltIns.hpp>	// Pascal unit
 #include <REST.Json.Types.hpp>	// Pascal unit
+#include <System.NetEncoding.hpp>	// Pascal unit
 #include <REST.Json.Interceptors.hpp>	// Pascal unit
 #include <REST.JsonReflect.hpp>	// Pascal unit
 #include <REST.Json.hpp>	// Pascal unit
 #include <Data.Bind.JSON.hpp>	// Pascal unit
 #include <REST.Client.hpp>	// Pascal unit
+#include <REST.Backend.ServiceTypes.hpp>	// Pascal unit
+#include <REST.Backend.Providers.hpp>	// Pascal unit
 #include <IdException.hpp>	// Pascal unit
 #include <IdResourceStrings.hpp>	// Pascal unit
 #include <IdStreamVCL.hpp>	// Pascal unit
@@ -148,6 +103,7 @@
 #include <IdStackConsts.hpp>	// Pascal unit
 #include <IdStackBSDBase.hpp>	// Pascal unit
 #include <IdIDN.hpp>	// Pascal unit
+#include <Winapi.WinSock.hpp>	// Pascal unit
 #include <Winapi.IpTypes.hpp>	// Pascal unit
 #include <Winapi.IpRtrMib.hpp>	// Pascal unit
 #include <Winapi.IpExport.hpp>	// Pascal unit
@@ -155,6 +111,8 @@
 #include <IdStackWindows.hpp>	// Pascal unit
 #include <IdStack.hpp>	// Pascal unit
 #include <IdIPAddress.hpp>	// Pascal unit
+#include <System.Masks.hpp>	// Pascal unit
+#include <System.IOUtils.hpp>	// Pascal unit
 #include <System.IniFiles.hpp>	// Pascal unit
 #include <System.Win.Registry.hpp>	// Pascal unit
 #include <IdAssignedNumbers.hpp>	// Pascal unit
@@ -164,6 +122,7 @@
 #include <IdHashSHA.hpp>	// Pascal unit
 #include <IdHMAC.hpp>	// Pascal unit
 #include <IdHMACSHA1.hpp>	// Pascal unit
+#include <Soap.EncdDecd.hpp>	// Pascal unit
 #include <IdComponent.hpp>	// Pascal unit
 #include <IdExceptionCore.hpp>	// Pascal unit
 #include <IdEMailAddress.hpp>	// Pascal unit
@@ -230,8 +189,6 @@
 #include <IdAllAuthentications.hpp>	// Pascal unit
 #include <IdHTTP.hpp>	// Pascal unit
 #include <REST.Backend.App42Api.hpp>	// Pascal unit
-#include <REST.Backend.MetaTypes.hpp>	// Pascal unit
-#include <REST.Backend.ServiceTypes.hpp>	// Pascal unit
 #include <REST.Backend.App42MetaTypes.hpp>	// Pascal unit
 #include <REST.Backend.App42Provider.hpp>	// Pascal unit
 #include <System.Messaging.hpp>	// Pascal unit

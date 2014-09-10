@@ -2,7 +2,7 @@
 // Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'REST.Backend.App42Services.pas' rev: 27.00 (iOS)
+// (DO NOT EDIT: machine generated header) 'REST.Backend.App42Services.pas' rev: 28.00 (iOS)
 
 #ifndef Rest_Backend_App42servicesHPP
 #define Rest_Backend_App42servicesHPP
@@ -205,10 +205,10 @@ class PASCALIMPLEMENTATION TApp42QueryAPI : public Rest::Backend::App42provider:
 	typedef Rest::Backend::App42provider::TApp42ServiceAPIAuth inherited;
 	
 protected:
-	void __fastcall GetServiceNames(/* out */ System::DynamicArray<System::UnicodeString> &ANames);
+	void __fastcall GetServiceNames(/* out */ System::TArray__1<System::UnicodeString> &ANames);
 	Rest::Backend::Metatypes::_di_IBackendMetaFactory __fastcall GetMetaFactory(void);
 	void __fastcall Query(const Rest::Backend::Metatypes::TBackendClassValue &AClass, System::UnicodeString const *AQuery, const int AQuery_High, System::Json::TJSONArray* const AJSONArray)/* overload */;
-	void __fastcall Query(const Rest::Backend::Metatypes::TBackendClassValue &AClass, System::UnicodeString const *AQuery, const int AQuery_High, System::Json::TJSONArray* const AJSONArray, /* out */ System::DynamicArray<Rest::Backend::Metatypes::TBackendEntityValue> &AObjects)/* overload */;
+	void __fastcall Query(const Rest::Backend::Metatypes::TBackendClassValue &AClass, System::UnicodeString const *AQuery, const int AQuery_High, System::Json::TJSONArray* const AJSONArray, /* out */ System::TArray__1<Rest::Backend::Metatypes::TBackendEntityValue> &AObjects)/* overload */;
 public:
 	/* TApp42ServiceAPI.Create */ inline __fastcall TApp42QueryAPI(void) : Rest::Backend::App42provider::TApp42ServiceAPIAuth() { }
 	/* TApp42ServiceAPI.Destroy */ inline __fastcall virtual ~TApp42QueryAPI(void) { }
@@ -277,9 +277,9 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS TApp42UsersAPI;
+class DELPHICLASS TApp42LoginAPI;
 #pragma pack(push,4)
-class PASCALIMPLEMENTATION TApp42UsersAPI : public Rest::Backend::App42provider::TApp42ServiceAPIAuth
+class PASCALIMPLEMENTATION TApp42LoginAPI : public Rest::Backend::App42provider::TApp42ServiceAPIAuth
 {
 	typedef Rest::Backend::App42provider::TApp42ServiceAPIAuth inherited;
 	
@@ -288,18 +288,100 @@ protected:
 	void __fastcall SignupUser(const System::UnicodeString AUserName, const System::UnicodeString APassword, System::Json::TJSONObject* const AUserData, /* out */ Rest::Backend::Metatypes::TBackendEntityValue &ACreatedObject);
 	void __fastcall LoginUser(const System::UnicodeString AUserName, const System::UnicodeString APassword, Rest::Backend::Servicetypes::_di_TFindObjectProc AProc)/* overload */;
 	void __fastcall LoginUser(const System::UnicodeString AUserName, const System::UnicodeString APassword, /* out */ Rest::Backend::Metatypes::TBackendEntityValue &AUser, System::Json::TJSONArray* const AJSON)/* overload */;
-	bool __fastcall DeleteUser(const Rest::Backend::Metatypes::TBackendEntityValue &AObject)/* overload */;
-	bool __fastcall FindUser(const Rest::Backend::Metatypes::TBackendEntityValue &AObject, Rest::Backend::Servicetypes::_di_TFindObjectProc AProc)/* overload */;
-	bool __fastcall FindUser(const Rest::Backend::Metatypes::TBackendEntityValue &AObject, /* out */ Rest::Backend::Metatypes::TBackendEntityValue &AUser, System::Json::TJSONArray* const AJSON)/* overload */;
 	bool __fastcall FindCurrentUser(const Rest::Backend::Metatypes::TBackendEntityValue &AObject, Rest::Backend::Servicetypes::_di_TFindObjectProc AProc)/* overload */;
 	bool __fastcall FindCurrentUser(const Rest::Backend::Metatypes::TBackendEntityValue &AObject, /* out */ Rest::Backend::Metatypes::TBackendEntityValue &AUser, System::Json::TJSONArray* const AJSON)/* overload */;
 	void __fastcall UpdateUser(const Rest::Backend::Metatypes::TBackendEntityValue &AObject, System::Json::TJSONObject* const AUserData, /* out */ Rest::Backend::Metatypes::TBackendEntityValue &AUpdatedObject);
+public:
+	/* TApp42ServiceAPI.Create */ inline __fastcall TApp42LoginAPI(void) : Rest::Backend::App42provider::TApp42ServiceAPIAuth() { }
+	/* TApp42ServiceAPI.Destroy */ inline __fastcall virtual ~TApp42LoginAPI(void) { }
+	
+private:
+	void *__IBackendAuthApi;	// Rest::Backend::Servicetypes::IBackendAuthApi 
+	
+public:
+	#if defined(MANAGED_INTERFACE_OPERATORS)
+	// {568A911A-B61B-45AA-8BD4-CFCAC0598CF6}
+	operator Rest::Backend::Servicetypes::_di_IBackendAuthApi()
+	{
+		Rest::Backend::Servicetypes::_di_IBackendAuthApi intf;
+		GetInterface(intf);
+		return intf;
+	}
+	#else
+	operator Rest::Backend::Servicetypes::IBackendAuthApi*(void) { return (Rest::Backend::Servicetypes::IBackendAuthApi*)&__IBackendAuthApi; }
+	#endif
+	
+};
+
+#pragma pack(pop)
+
+class DELPHICLASS TApp42LoginService;
+#pragma pack(push,4)
+class PASCALIMPLEMENTATION TApp42LoginService : public Rest::Backend::App42provider::TApp42BackendService__1<TApp42LoginAPI*> 
+{
+	typedef Rest::Backend::App42provider::TApp42BackendService__1<TApp42LoginAPI*>  inherited;
+	
+protected:
+	Rest::Backend::Servicetypes::_di_IBackendAuthApi __fastcall CreateAuthApi(void);
+	Rest::Backend::Servicetypes::_di_IBackendAuthApi __fastcall GetAuthApi(void);
+public:
+	/* TApp42BackendService.Create */ inline __fastcall virtual TApp42LoginService(const Rest::Backend::Providers::_di_IBackendProvider AProvider) : Rest::Backend::App42provider::TApp42BackendService__1<TApp42LoginAPI*> (AProvider) { }
+	/* TApp42BackendService.Destroy */ inline __fastcall virtual ~TApp42LoginService(void) { }
+	
+private:
+	void *__IBackendAuthService;	// Rest::Backend::Servicetypes::IBackendAuthService 
+	
+public:
+	#if defined(MANAGED_INTERFACE_OPERATORS)
+	// {DB06E5A1-7261-44A3-9C3E-9805744D53C9}
+	operator Rest::Backend::Servicetypes::_di_IBackendAuthService()
+	{
+		Rest::Backend::Servicetypes::_di_IBackendAuthService intf;
+		GetInterface(intf);
+		return intf;
+	}
+	#else
+	operator Rest::Backend::Servicetypes::IBackendAuthService*(void) { return (Rest::Backend::Servicetypes::IBackendAuthService*)&__IBackendAuthService; }
+	#endif
+	#if defined(MANAGED_INTERFACE_OPERATORS)
+	// {E8BD0783-0E4D-459F-9EEC-11B5F29FE792}
+	operator Rest::Backend::Providers::_di_IBackendService()
+	{
+		Rest::Backend::Providers::_di_IBackendService intf;
+		GetInterface(intf);
+		return intf;
+	}
+	#else
+	operator Rest::Backend::Providers::IBackendService*(void) { return (Rest::Backend::Providers::IBackendService*)&__IBackendAuthService; }
+	#endif
+	
+};
+
+#pragma pack(pop)
+
+class DELPHICLASS TApp42UsersAPI;
+#pragma pack(push,4)
+class PASCALIMPLEMENTATION TApp42UsersAPI : public TApp42LoginAPI
+{
+	typedef TApp42LoginAPI inherited;
+	
+protected:
+	HIDESBASE Rest::Backend::Metatypes::_di_IBackendMetaFactory __fastcall GetMetaFactory(void);
+	HIDESBASE void __fastcall SignupUser(const System::UnicodeString AUserName, const System::UnicodeString APassword, System::Json::TJSONObject* const AUserData, /* out */ Rest::Backend::Metatypes::TBackendEntityValue &ACreatedObject);
+	HIDESBASE void __fastcall LoginUser(const System::UnicodeString AUserName, const System::UnicodeString APassword, Rest::Backend::Servicetypes::_di_TFindObjectProc AProc)/* overload */;
+	HIDESBASE void __fastcall LoginUser(const System::UnicodeString AUserName, const System::UnicodeString APassword, /* out */ Rest::Backend::Metatypes::TBackendEntityValue &AUser, System::Json::TJSONArray* const AJSON)/* overload */;
+	bool __fastcall DeleteUser(const Rest::Backend::Metatypes::TBackendEntityValue &AObject)/* overload */;
+	bool __fastcall FindUser(const Rest::Backend::Metatypes::TBackendEntityValue &AObject, Rest::Backend::Servicetypes::_di_TFindObjectProc AProc)/* overload */;
+	bool __fastcall FindUser(const Rest::Backend::Metatypes::TBackendEntityValue &AObject, /* out */ Rest::Backend::Metatypes::TBackendEntityValue &AUser, System::Json::TJSONArray* const AJSON)/* overload */;
+	HIDESBASE bool __fastcall FindCurrentUser(const Rest::Backend::Metatypes::TBackendEntityValue &AObject, Rest::Backend::Servicetypes::_di_TFindObjectProc AProc)/* overload */;
+	HIDESBASE bool __fastcall FindCurrentUser(const Rest::Backend::Metatypes::TBackendEntityValue &AObject, /* out */ Rest::Backend::Metatypes::TBackendEntityValue &AUser, System::Json::TJSONArray* const AJSON)/* overload */;
+	HIDESBASE void __fastcall UpdateUser(const Rest::Backend::Metatypes::TBackendEntityValue &AObject, System::Json::TJSONObject* const AUserData, /* out */ Rest::Backend::Metatypes::TBackendEntityValue &AUpdatedObject);
 	bool __fastcall QueryUserName(const System::UnicodeString AUserName, Rest::Backend::Servicetypes::_di_TFindObjectProc AProc)/* overload */;
 	bool __fastcall QueryUserName(const System::UnicodeString AUserName, /* out */ Rest::Backend::Metatypes::TBackendEntityValue &AUser, System::Json::TJSONArray* const AJSON)/* overload */;
 	void __fastcall QueryUsers(System::UnicodeString const *AQuery, const int AQuery_High, System::Json::TJSONArray* const AJSONArray)/* overload */;
-	void __fastcall QueryUsers(System::UnicodeString const *AQuery, const int AQuery_High, System::Json::TJSONArray* const AJSONArray, /* out */ System::DynamicArray<Rest::Backend::Metatypes::TBackendEntityValue> &AMetaArray)/* overload */;
+	void __fastcall QueryUsers(System::UnicodeString const *AQuery, const int AQuery_High, System::Json::TJSONArray* const AJSONArray, /* out */ System::TArray__1<Rest::Backend::Metatypes::TBackendEntityValue> &AMetaArray)/* overload */;
 public:
-	/* TApp42ServiceAPI.Create */ inline __fastcall TApp42UsersAPI(void) : Rest::Backend::App42provider::TApp42ServiceAPIAuth() { }
+	/* TApp42ServiceAPI.Create */ inline __fastcall TApp42UsersAPI(void) : TApp42LoginAPI() { }
 	/* TApp42ServiceAPI.Destroy */ inline __fastcall virtual ~TApp42UsersAPI(void) { }
 	
 private:
@@ -379,7 +461,7 @@ protected:
 	bool __fastcall FindObject(const Rest::Backend::Metatypes::TBackendEntityValue &AObject, Rest::Backend::Servicetypes::_di_TFindObjectProc AProc);
 	void __fastcall UpdateObject(const Rest::Backend::Metatypes::TBackendEntityValue &AObject, System::Json::TJSONObject* const AJSONObject, /* out */ Rest::Backend::Metatypes::TBackendEntityValue &AUpdatedObject);
 	void __fastcall QueryObjects(const Rest::Backend::Metatypes::TBackendClassValue &AClass, System::UnicodeString const *AQuery, const int AQuery_High, System::Json::TJSONArray* const AJSONArray)/* overload */;
-	void __fastcall QueryObjects(const Rest::Backend::Metatypes::TBackendClassValue &AClass, System::UnicodeString const *AQuery, const int AQuery_High, System::Json::TJSONArray* const AJSONArray, /* out */ System::DynamicArray<Rest::Backend::Metatypes::TBackendEntityValue> &AObjects)/* overload */;
+	void __fastcall QueryObjects(const Rest::Backend::Metatypes::TBackendClassValue &AClass, System::UnicodeString const *AQuery, const int AQuery_High, System::Json::TJSONArray* const AJSONArray, /* out */ System::TArray__1<Rest::Backend::Metatypes::TBackendEntityValue> &AObjects)/* overload */;
 public:
 	/* TApp42ServiceAPI.Create */ inline __fastcall TApp42StorageAPI(void) : Rest::Backend::App42provider::TApp42ServiceAPIAuth() { }
 	/* TApp42ServiceAPI.Destroy */ inline __fastcall virtual ~TApp42StorageAPI(void) { }

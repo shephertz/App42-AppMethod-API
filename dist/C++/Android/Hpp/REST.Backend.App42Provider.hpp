@@ -2,7 +2,7 @@
 // Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'REST.Backend.App42Provider.pas' rev: 27.00 (Android)
+// (DO NOT EDIT: machine generated header) 'REST.Backend.App42Provider.pas' rev: 28.00 (Android)
 
 #ifndef Rest_Backend_App42providerHPP
 #define Rest_Backend_App42providerHPP
@@ -299,10 +299,10 @@ class PASCALIMPLEMENTATION TApp42ServiceAPIAuth : public TApp42ServiceAPI
 protected:
 	void __fastcall Login(const Rest::Backend::Metatypes::TBackendEntityValue &ALogin);
 	void __fastcall Logout(void);
-	void __fastcall SetDefaultAuthentication(Rest::Backend::Servicetypes::TBackendDefaultAuthentication ADefaultAuthentication);
-	Rest::Backend::Servicetypes::TBackendDefaultAuthentication __fastcall GetDefaultAuthentication(void);
-	void __fastcall SetAuthentication(Rest::Backend::Servicetypes::TBackendAuthentication AAuthentication);
-	Rest::Backend::Servicetypes::TBackendAuthentication __fastcall GetAuthentication(void);
+	void __fastcall SetDefaultAuthentication(Rest::Backend::Providers::TBackendDefaultAuthentication ADefaultAuthentication);
+	Rest::Backend::Providers::TBackendDefaultAuthentication __fastcall GetDefaultAuthentication(void);
+	void __fastcall SetAuthentication(Rest::Backend::Providers::TBackendAuthentication AAuthentication);
+	Rest::Backend::Providers::TBackendAuthentication __fastcall GetAuthentication(void);
 public:
 	/* TApp42ServiceAPI.Create */ inline __fastcall TApp42ServiceAPIAuth(void) : TApp42ServiceAPI() { }
 	/* TApp42ServiceAPI.Destroy */ inline __fastcall virtual ~TApp42ServiceAPIAuth(void) { }

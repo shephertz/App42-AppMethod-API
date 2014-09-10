@@ -72,7 +72,29 @@ type
 
   // Users service
 
-  TApp42UsersAPI = class(TApp42ServiceAPIAuth, IBackendUsersApi)
+  TApp42LoginAPI = class(TApp42ServiceAPIAuth, IBackendAuthApi)
+  protected
+    { IBackendLoginAPI }
+    function GetMetaFactory: IBackendMetaFactory;
+    procedure SignupUser(const AUserName, APassword: string; const AUserData: TJSONObject;
+      out ACreatedObject: TBackendEntityValue);
+    procedure LoginUser(const AUserName, APassword: string; AProc: TFindObjectProc); overload;
+    procedure LoginUser(const AUserName, APassword: string; out AUser: TBackendEntityValue; const AJSON: TJSONArray); overload;
+    function FindCurrentUser(const AObject: TBackendEntityValue; AProc: TFindObjectProc): Boolean; overload;
+    function FindCurrentUser(const AObject: TBackendEntityValue; out AUser: TBackendEntityValue; const AJSON: TJSONArray): Boolean; overload;
+    procedure UpdateUser(const AObject: TBackendEntityValue; const AUserData: TJSONObject; out AUpdatedObject: TBackendEntityValue);
+  end;
+
+  TApp42LoginService = class(TApp42BackendService<TApp42LoginAPI>, IBackendService, IBackendAuthService)
+  protected
+    { IBackendAuthService }
+    function CreateAuthApi: IBackendAuthApi;
+    function GetAuthApi: IBackendAuthApi;
+  end;
+
+  // Users service
+
+  TApp42UsersAPI = class(TApp42LoginApi, IBackendUsersApi)
   protected
     { IBackendUsersAPI }
     function GetMetaFactory: IBackendMetaFactory;
@@ -312,6 +334,19 @@ begin
   Result := FBackendAPI;
 end;
 
+{ TParseLoginService }
+
+function TApp42LoginService.CreateAuthApi: IBackendAuthApi;
+begin
+  Result := CreateBackendApi;
+end;
+
+function TApp42LoginService.GetAuthApi: IBackendAuthApi;
+begin
+  EnsureBackendApi;
+  Result := FBackendAPI;
+end;
+
 { TApp42StorageAPI }
 
 
@@ -471,6 +506,105 @@ begin
   for LFactory in FFactories do
     LFactory.Unregister;
   FreeAndNil(FFactories);
+end;
+
+{ TApp42LoginAPI }
+
+function TApp42LoginAPI.GetMetaFactory: IBackendMetaFactory;
+begin
+  Result := TMetaFactory.Create;
+end;
+
+function TApp42LoginAPI.FindCurrentUser(const AObject: TBackendEntityValue;
+  AProc: TFindObjectProc): Boolean;
+var
+  LMetaLogin: TMetaLogin;
+begin
+  if AObject.Data is TMetaLogin then
+  begin
+    LMetaLogin := TMetaLogin(AObject.Data);
+    App42API.Login(LMetaLogin.Login);
+    try
+      Result := App42API.RetrieveCurrentUser(
+        procedure(const AUser: TApp42API.TUser; const AObj: TJSONObject)
+        begin
+          AProc(TApp42MetaFactory.CreateMetaFoundUser(AUser), AObj);
+        end);
+    finally
+      App42API.Logout;
+    end;
+  end
+  else
+    raise EArgumentException.Create(sParameterNotMetaType);
+end;
+
+function TApp42LoginAPI.FindCurrentUser(const AObject: TBackendEntityValue;
+  out AUser: TBackendEntityValue; const AJSON: TJSONArray): Boolean;
+var
+  LMetaLogin: TMetaLogin;
+  LUser: TApp42API.TUser;
+begin
+  if AObject.Data is TMetaLogin then
+  begin
+    LMetaLogin := TMetaLogin(AObject.Data);
+    App42API.Login(LMetaLogin.Login);
+    try
+      Result := App42API.RetrieveCurrentUser(LUser, AJSON);
+      AUser := TApp42MetaFactory.CreateMetaFoundUser(LUser);
+    finally
+      App42API.Logout;
+    end;
+  end
+  else
+    raise EArgumentException.Create(sParameterNotMetaType);
+end;
+
+procedure TApp42LoginAPI.LoginUser(const AUserName, APassword: string;
+  AProc: TFindObjectProc);
+begin
+  App42API.LoginUser(AUserName, APassword,
+   procedure(const ALogin: TApp42API.TLogin; const AUserObject: TJSONObject)
+   begin
+      AProc(TApp42MetaFactory.CreateMetaLoginUser(ALogin), AUserObject);
+   end);
+end;
+
+procedure TApp42LoginAPI.LoginUser(const AUserName, APassword: string;
+  out AUser: TBackendEntityValue; const AJSON: TJSONArray);
+var
+  LLogin: TApp42API.TLogin;
+begin
+  App42API.LoginUser(AUserName, APassword, LLogin, AJSON);
+  AUser := TApp42MetaFactory.CreateMetaLoginUser(LLogin);
+end;
+
+
+procedure TApp42LoginAPI.SignupUser(const AUserName, APassword: string;
+  const AUserData: TJSONObject; out ACreatedObject: TBackendEntityValue);
+var
+  LLogin: TApp42API.TLogin;
+begin
+  App42API.SignupUser(AUserName, APassword, AUserData, LLogin);
+  ACreatedObject := TApp42MetaFactory.CreateMetaSignupUser(LLogin);
+end;
+
+procedure TApp42LoginAPI.UpdateUser(const AObject: TBackendEntityValue;
+  const AUserData: TJSONObject; out AUpdatedObject: TBackendEntityValue);
+var
+  LUpdated: TApp42API.TUpdatedAt;
+begin
+  if AObject.Data is TMetaLogin then
+  begin
+    App42API.UpdateUser(TMetaLogin(AObject.Data).Login, AUserData, LUpdated);
+    AUpdatedObject := TApp42MetaFactory.CreateMetaUpdatedUser(LUpdated);
+  end
+  else if AObject.Data is TMetaUser then
+  begin
+    App42API.UpdateUser(TMetaUser(AObject.Data).User.ObjectID, AUserData, LUpdated);
+    AUpdatedObject := TApp42MetaFactory.CreateMetaUpdatedUser(LUpdated);
+  end
+  else
+    raise EArgumentException.Create(sParameterNotMetaType);
 end;
 
 { TApp42UsersAPI }
@@ -718,5 +852,6 @@ finalization
   UnregisterServices;
 
 end.
+
 
 
